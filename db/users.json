@@ -1,0 +1,23 @@
+[
+  {
+    "fullname": "Diaz Linggaputra",
+    "email": "diaz@mail.com",
+    "password": "admin",
+    "cities": "DKI Jakarta",
+    "bio": "Saya senang berjalan-jalan dan shopping karena menurut saya itu healing bagi saya"
+  },
+  {
+    "fullname": "Darius Langitpurna",
+    "email": "darius@mail.com",
+    "password": "admin",
+    "cities": "Pho Minh City",
+    "bio": "Cingcai wu lan!"
+  },
+  {
+    "fullname": "Herlina Cantika",
+    "email": "herlina@mail.com",
+    "password": "admin",
+    "cities": "Bandung",
+    "bio": "Berikan aku sebuah uang, maka aku akan membelikan semangkuk bakso. Berikan aku sepuluh uang, maka aku akan membelikanmu seisi dunia"
+  }
+]

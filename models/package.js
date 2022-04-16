@@ -44,12 +44,21 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      imageUrl: {
-        type: DataTypes.STRING,
+      imageThumbnail: {
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Package Image URL is required",
+            msg: "Package Image Thumbnail is required",
+          },
+        },
+      },
+      imageUrls: {
+        type: DataTypes.ARRAY(DataTypes.TEXT),
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Package Image URLs is required",
           },
         },
       },
@@ -68,6 +77,24 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notNull: {
             msg: "Package departure date is required",
+          },
+        },
+      },
+      rating: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Package rating is required",
+          },
+        },
+      },
+      reviewers: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Package number of reviewers is required",
           },
         },
       },

@@ -20,8 +20,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      imageUrl: {
-        type: Sequelize.STRING,
+      imageThumbnail: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      imageUrls: {
+        type: Sequelize.ARRAY(Sequelize.TEXT),
         allowNull: false,
       },
       description: {
@@ -30,6 +34,14 @@ module.exports = {
       },
       departureDate: {
         type: Sequelize.DATE,
+        allowNull: false,
+      },
+      rating: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      reviewers: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       createdAt: {
