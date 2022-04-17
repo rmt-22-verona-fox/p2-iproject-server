@@ -15,7 +15,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        uniqe: true,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
@@ -33,6 +33,9 @@ module.exports = {
       isVerified: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+      },
+      verificationCode: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
