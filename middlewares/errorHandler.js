@@ -7,6 +7,12 @@ module.exports = (err, req, res, next) => {
       });
       break;
 
+    case "JsonWebTokenError":
+      res.status(401).json({
+        message: "Please login first!",
+      });
+      break;
+
     case "DataNotFound":
       res.status(404).json({
         message: "Data not found",

@@ -67,6 +67,14 @@ class AuthController {
 
       res.status(200).json({
         access_token: token,
+        profile: {
+          id: matchingUser.id,
+          fullName: matchingUser.fullName,
+          email: matchingUser.email,
+          city: matchingUser.city,
+          bio: matchingUser.bio,
+          profilePicture: matchingUser.profilePicture,
+        },
       });
     } catch (err) {
       next(err);

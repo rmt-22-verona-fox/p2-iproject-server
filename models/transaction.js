@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 1,
         validate: {
           notNull: {
             msg: "Transaction quantity is required",
@@ -60,6 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       paymentStatus: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
         validate: {
           notNull: {
             msg: "Transaction status is required",
@@ -72,5 +74,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Transaction",
     }
   );
+
   return Transaction;
 };
