@@ -88,6 +88,29 @@ class PackageController {
       client.close();
     }
   }
+
+  static async show(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      const onePackage = await Package.findOne({
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        where: {
+          id,
+        },
+      });
+
+      if (!onePackage) {
+        throw { name: "DataNotFound" };
+      }
+
+      res.status(200).json(onePackage);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = PackageController;

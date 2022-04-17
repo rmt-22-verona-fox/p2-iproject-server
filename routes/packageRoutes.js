@@ -6,5 +6,6 @@ router.get("/all", PackageController.index);
 router.get("/promos", PackageController.promo);
 router.get("/categories", PackageController.categories);
 router.get("/testimonies", PackageController.testimonies);
+router.get("/:id", PackageController.show);
 
 module.exports = router;

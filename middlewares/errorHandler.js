@@ -7,6 +7,12 @@ module.exports = (err, req, res, next) => {
       });
       break;
 
+    case "DataNotFound":
+      res.status(404).json({
+        message: "Data not found",
+      });
+      break;
+
     case "LoginValidationError":
       res.status(400).json({
         message: err.message,
