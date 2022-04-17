@@ -25,6 +25,12 @@ module.exports = (err, req, res, next) => {
       });
       break;
 
+    case "MongoDBConnectionError":
+      res.status(500).json({
+        message: err.message,
+      });
+      break;
+
     default:
       res.status(500).json({
         message: "Internal server error",

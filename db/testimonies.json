@@ -1,0 +1,38 @@
+[
+  {
+    "fullName": "Afrilian Frily",
+    "imageUrl": "https://images.unsplash.com/photo-1551706872-893907c44a3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "city": "Bandung, Jawa Barat",
+    "rating": 4.7,
+    "review": "Nyari makanan halal gampang banget udah ada tour guidenya. Tour guidenya juga ramah enak diajak ngobrol, dan penginapannya pun nyaman",
+    "destination": "Nusa Penida, Bali",
+    "checkoutDate": "2021-10-09T17:00:00.000Z"
+  },
+  {
+    "fullName": "Sinta Ariani",
+    "imageUrl": "https://images.unsplash.com/photo-1520466809213-7b9a56adcd45?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+    "city": "Cimahi, Jawa Barat",
+    "rating": 4.7,
+    "review": "Perjalanannya nyaman banget, ditambah dapet penginapan yang bagus. Tour guidenya juga baik banget dan ramah, ga nyesel pesen paket travel disini",
+    "destination": "Nusa Penida, Bali",
+    "checkoutDate": "2021-10-12T17:00:00.000Z"
+  },
+  {
+    "fullName": "Shania Deloren",
+    "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+    "city": "Jakarta Timur, DKI Jakarta",
+    "rating": 4.5,
+    "review": "Perjalanannya asik, gaperlu pusing pusing mikirin mau kulineran apa, udah ada tour guidenya. Mau kemana-mana juga enak tinggal tanya tour guidenya",
+    "destination": "Nusa Penida, Bali",
+    "checkoutDate": "2021-10-15T17:00:00.000Z"
+  },
+  {
+    "fullName": "Arif Hidayat",
+    "imageUrl": "https://images.unsplash.com/photo-1535325019257-3f8a7994a3f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+    "city": "Bandung, Jawa Barat",
+    "rating": 4.3,
+    "review": "Nyari makanan halal gampang banget udah ada tour guidenya. Tour guidenya juga ramah banget. Tapi pas aku tembak dia gamau sama aku",
+    "destination": "Nusa Penida, Bali",
+    "checkoutDate": "2021-12-31T17:00:00.000Z"
+  }
+]
