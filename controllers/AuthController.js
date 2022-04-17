@@ -93,7 +93,6 @@ class AuthController {
             where: {
               email: req.user.email,
             },
-            returning: true,
           }
         );
 

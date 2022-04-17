@@ -44,6 +44,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      isPromo: {
+        type: Sequelize.BOOLEAN,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

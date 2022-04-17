@@ -29,8 +29,6 @@ module.exports = async (req, res, next) => {
       verificationCode: userAuthenticated.verificationCode.toLowerCase(),
     };
 
-    console.log(req.user, "<<<<<<<<<<<<");
-
     next();
   } catch (err) {
     next(err);

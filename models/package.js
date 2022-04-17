@@ -98,6 +98,15 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      isPromo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Package promotion status is required",
+          },
+        },
+      },
     },
     {
       sequelize,

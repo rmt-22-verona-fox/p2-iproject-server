@@ -13,7 +13,8 @@
     "description": "Untuk 1 orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam, transportasi, travel, snorkeling",
     "departureDate": "2022-04-30T17:00:00.000Z",
     "rating": 4.6,
-    "reviewers": 1242
+    "reviewers": 1242,
+    "isPromo": false
   },
   {
     "destinationName": "Gwanghwamun Gate, Seoul",
@@ -29,7 +30,8 @@
     "description": "Untuk 1 orang, tiket pesawat, penginapan 2 malam, tour guide, makan siang, makan malam, transportasi, travel, snorkeling",
     "departureDate": "2022-05-01T17:00:00.000Z",
     "rating": 4.7,
-    "reviewers": 1302
+    "reviewers": 1302,
+    "isPromo": false
   },
   {
     "destinationName": "Nusa Penida, Bali",
@@ -45,7 +47,8 @@
     "description": "Untuk 1 orang, tiket pesawat, penginapan 2 malam, tour guide, makan siang, makan malam, transportasi, travel, snorkeling",
     "departureDate": "2022-05-10T17:00:00.000Z",
     "rating": 4.8,
-    "reviewers": 2503
+    "reviewers": 2503,
+    "isPromo": false
   },
   {
     "destinationName": "Borobudur, Yogyakarta",
@@ -61,7 +64,8 @@
     "description": "Untuk 1 orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam, transportasi",
     "departureDate": "2022-05-27T17:00:00.000Z",
     "rating": 4.7,
-    "reviewers": 2103
+    "reviewers": 2103,
+    "isPromo": true
   },
   {
     "destinationName": "Gunung Bromo, Malang",
@@ -77,7 +81,8 @@
     "description": "Untuk 2 orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam, transportasi, off-road",
     "departureDate": "2022-05-23T17:00:00.000Z",
     "rating": 4.6,
-    "reviewers": 1600
+    "reviewers": 1600,
+    "isPromo": true
   },
   {
     "destinationName": "Menara Eiffel, Paris",
@@ -93,6 +98,7 @@
     "description": "Untuk 1 orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam, transportasi, off-road",
     "departureDate": "2022-08-08T17:00:00.000Z",
     "rating": 4.9,
-    "reviewers": 640
+    "reviewers": 640,
+    "isPromo": true
   }
 ]
