@@ -1,5 +1,4 @@
 "use strict";
-const { generateHashPassword } = require("../helpers/bcrypt");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -12,13 +11,14 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    const userData = require("../db/users.json").map((user) => ({
-      ...user,
-      password: generateHashPassword(user.password),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }));
-    await queryInterface.bulkInsert("Users", userData);
+    const transactionData = require("../db/transactions.json").map(
+      (transaction) => ({
+        ...transaction,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+    );
+    await queryInterface.bulkInsert("Transactions", transactionData);
   },
 
   async down(queryInterface, Sequelize) {
@@ -28,6 +28,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Users", null, {});
+    await queryInterface.bulkDelete("Transactions", null, {});
   },
 };
