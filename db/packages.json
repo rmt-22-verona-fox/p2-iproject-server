@@ -32,22 +32,6 @@
     "reviewers": 1302
   },
   {
-    "destinationName": "Gwanghwamun Gate, Seoul",
-    "destinationCountry": "Korea Selatan",
-    "price": 12500000,
-    "imageThumbnail": "https://images.unsplash.com/photo-1615428277562-f2dd4b887de2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    "imageUrls": [
-      "https://images.unsplash.com/photo-1615428277562-f2dd4b887de2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1646865437685-e71b00c92b96?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-      "https://images.unsplash.com/photo-1639761072272-13ba0b6ab36b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1621502893269-79672a3069dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-    ],
-    "description": "Untuk 1 orang, tiket pesawat, penginapan 2 malam, tour guide, makan siang, makan malam, transportasi, travel, snorkeling",
-    "departureDate": "2022-05-01T17:00:00.000Z",
-    "rating": 4.9,
-    "reviewers": 1527
-  },
-  {
     "destinationName": "Nusa Penida, Bali",
     "destinationCountry": "Indonesia",
     "price": 6800000,

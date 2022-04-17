@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      fullname: {
+      fullName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -21,11 +21,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cities: {
+      city: {
         type: Sequelize.STRING,
       },
       bio: {
         type: Sequelize.TEXT,
+      },
+      profilePicture: {
+        type: Sequelize.TEXT,
+      },
+      isVerified: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

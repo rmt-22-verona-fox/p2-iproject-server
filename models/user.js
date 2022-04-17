@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      fullname: {
+      fullName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -52,8 +52,13 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      cities: DataTypes.STRING,
+      city: DataTypes.STRING,
       bio: DataTypes.TEXT,
+      profilePicture: DataTypes.TEXT,
+      isVerified: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
     },
     {
       sequelize,

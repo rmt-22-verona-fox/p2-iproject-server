@@ -1,23 +1,47 @@
 [
   {
-    "fullname": "Diaz Linggaputra",
-    "email": "diaz@mail.com",
-    "password": "admin",
-    "cities": "DKI Jakarta",
-    "bio": "Saya senang berjalan-jalan dan shopping karena menurut saya itu healing bagi saya"
+    "fullName": "Afrilian Frily",
+    "email": "frily@mail.com",
+    "password": "12345",
+    "cities": "Bandung, Jawa Barat",
+    "bio": "Saya sangat senang sekali traveling ke berbagai tempat apalagi dengan tempat tempat seperti pegunungan",
+    "profilePicture": "https://images.unsplash.com/photo-1551706872-893907c44a3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "isVerified": true
   },
   {
-    "fullname": "Darius Langitpurna",
-    "email": "darius@mail.com",
-    "password": "admin",
-    "cities": "Pho Minh City",
-    "bio": "Cingcai wu lan!"
+    "fullName": "Arif Hidayat",
+    "email": "arif@mail.com",
+    "password": "12345",
+    "cities": "Bandung, Jawa Barat",
+    "bio": "Cita-cita saya dari kecil adalah menjadi traveller. Karena perantau adalah cita-cita saya",
+    "profilePicture": "https://images.unsplash.com/photo-1535325019257-3f8a7994a3f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+    "isVerified": true
   },
   {
-    "fullname": "Herlina Cantika",
-    "email": "herlina@mail.com",
+    "fullName": "Sinta Ariani",
+    "email": "sinta@mail.com",
+    "password": "12345",
+    "cities": "Cimahi, Jawa Barat",
+    "bio": "Berikan aku sebuah uang, maka aku akan membelikan semangkuk bakso. Berikan aku sepuluh uang, maka aku akan membelikanmu seisi dunia",
+    "profilePicture": "https://images.unsplash.com/photo-1520466809213-7b9a56adcd45?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+    "isVerified": true
+  },
+  {
+    "fullName": "Shania Deloren",
+    "email": "shania@gmail.com",
+    "password": "12345",
+    "cities": "Jakarta Timur, DKI Jakarta",
+    "bio": "I love travelling! I meet a lot of guys, we have a lot chit-chat and fun!",
+    "profilePicture": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+    "isVerified": true
+  },
+  {
+    "fullName": "Diaz Linggaputra",
+    "email": "diazlinggaputra@gmail.com",
     "password": "admin",
-    "cities": "Bandung",
-    "bio": "Berikan aku sebuah uang, maka aku akan membelikan semangkuk bakso. Berikan aku sepuluh uang, maka aku akan membelikanmu seisi dunia"
+    "cities": "Jakarta Timur, DKI Jakarta",
+    "bio": "Ketika aku besar nanti, aku ingin mengunjungi 300 negara. Tapi sekarang aku masih kecil",
+    "profilePicture": "https://media-exp1.licdn.com/dms/image/C5603AQHt2saL1yb0YA/profile-displayphoto-shrink_200_200/0/1642204136772?e=2147483647&v=beta&t=ULEptecLgNpYvi9ogfHNwXBFOIjf-LVG5NRL9OBEscM",
+    "isVerified": true
   }
 ]
