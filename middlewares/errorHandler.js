@@ -7,6 +7,24 @@ module.exports = (err, req, res, next) => {
       });
       break;
 
+    case "LoginValidationError":
+      res.status(400).json({
+        message: err.message,
+      });
+      break;
+
+    case "UserNotValid":
+      res.status(401).json({
+        message: "Invalid email/password",
+      });
+      break;
+
+    case "EmailVerificationError":
+      res.status(401).json({
+        message: err.message,
+      });
+      break;
+
     default:
       res.status(500).json({
         message: "Internal server error",

@@ -98,17 +98,16 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.afterCreate(async (instance, options) => {
     /* VERIFICATION MAIL WITH TWILIO SENDGRID */
-    const sendgridMsg = {
-      to: instance.email,
-      from: "diazlinggaputra@gmail.com",
-      subject: "Kode Verifikasi Travelio",
-      html: content(
-        instance.fullName.trim().split(" ")[0],
-        instance.verificationCode
-      ),
-    };
-
-    await sgMail.send(sendgridMsg);
+    // const sendgridMsg = {
+    //   to: instance.email,
+    //   from: "diazlinggaputra@gmail.com",
+    //   subject: "Kode Verifikasi Travelio",
+    //   html: content(
+    //     instance.fullName.trim().split(" ")[0],
+    //     instance.verificationCode
+    //   ),
+    // };
+    // await sgMail.send(sendgridMsg);
   });
   return User;
 };
