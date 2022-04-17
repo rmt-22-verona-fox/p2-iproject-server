@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const { User, Package } = require("../models");
+const { Package } = require("../models");
 
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);

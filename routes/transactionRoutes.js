@@ -12,4 +12,12 @@ router.post(
   TransactionController.checkout
 );
 
+/* NEED FRONT END INTEGRATION */
+router.post(
+  "/payment",
+  requireLogin,
+  requireVerification,
+  TransactionController.payment
+);
+
 module.exports = router;

@@ -1,4 +1,5 @@
-const { Package, User, Transaction } = require("../models");
+const { Package, Transaction } = require("../models");
+const snap = require("../services/midtrans");
 
 class TransactionController {
   static async profile(req, res, next) {
@@ -13,7 +14,7 @@ class TransactionController {
         },
         include: [
           {
-            model: User,
+            model: Package,
             attributes: {
               exclude: ["createdAt", "updatedAt"],
             },
@@ -46,6 +47,32 @@ class TransactionController {
       res.status(200).json(checkoutPackage);
     } catch (err) {
       next(err);
+    }
+  }
+
+  /* NEED FRONT END INTEGRATION */
+  static async payment(req, res, next) {
+    try {
+      let parameter = {
+        transaction_details: {
+          order_id: "test-transaction-123",
+          gross_amount: 200000,
+        },
+        credit_card: {
+          secure: true,
+        },
+      };
+
+      const transaction = await snap.createTransaction(parameter);
+
+      let transactionToken = transaction.token;
+      console.log("transactionToken:", transactionToken);
+
+      let transactionRedirectUrl = transaction.redirect_url;
+
+      console.log("transactionRedirectUrl:", transactionRedirectUrl);
+    } catch (err) {
+      console.log("Error occured:", err.message);
     }
   }
 }
