@@ -4,7 +4,7 @@ module.exports = async (req, res, next) => {
       next();
     } else {
       throw {
-        name: "EmailVerificationError",
+        name: "EmailNotVerified",
         message: "Kamu belum melakukan verifikasi email",
       };
     }

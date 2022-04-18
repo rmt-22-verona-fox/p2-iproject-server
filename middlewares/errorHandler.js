@@ -9,7 +9,7 @@ module.exports = (err, req, res, next) => {
 
     case "JsonWebTokenError":
       res.status(401).json({
-        message: "Please login first!",
+        message: "Invalid token",
       });
       break;
 
@@ -32,7 +32,13 @@ module.exports = (err, req, res, next) => {
       break;
 
     case "EmailVerificationError":
-      res.status(401).json({
+      res.status(400).json({
+        message: err.message,
+      });
+      break;
+
+    case "EmailNotVerified":
+      res.status(403).json({
         message: err.message,
       });
       break;
