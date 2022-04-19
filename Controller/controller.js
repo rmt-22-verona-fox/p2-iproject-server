@@ -1,6 +1,8 @@
 const bookmark = require("../models/bookmark");
 const { User, Bookmark } = require("../models/index");
 const axios = require("axios");
+const { compareHash } = require("../helpers/bcryptjs");
+const { getToken } = require("../helpers/jwt");
 
 class Controller {
   static async register(req, res, next) {
@@ -20,6 +22,41 @@ class Controller {
       });
     } catch (err) {
       console.log(err);
+      next(err);
+    }
+  }
+  static async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+      const user = await User.findOne({
+        where: {
+          email,
+        },
+      });
+
+      if (!user) {
+        throw { name: "email or password invalid" };
+      }
+      const comparedHash = compareHash(password, user.password);
+      if (!comparedHash) {
+        throw { name: "email or password invalid" };
+      }
+
+      const payload = {
+        id: user.id,
+        email: user.email,
+      };
+
+      const token = getToken(payload);
+      res.status(200).json({
+        statusCode: 200,
+        message: "Success Login",
+        accessToken: token,
+        name: user.username,
+        role: user.role,
+        id: user.id,
+      });
+    } catch (err) {
       next(err);
     }
   }
@@ -47,7 +84,7 @@ class Controller {
       const bookmarks = await Bookmark.findAll({
         attributes: ["SurahId", "id"],
         where: {
-          UserId: 2,
+          UserId: req.user.id,
         },
       });
       let surah = bookmarks.map(async (el) => {
@@ -86,7 +123,7 @@ class Controller {
       const { data } = await axios.get(
         `https://api.quran.sutanlab.id/surah/${id}`
       );
-      console.log(data.data.verses);
+      console.log(data);
       const verses = data.data.verses.map((el) => {
         let obj = {
           ayat: el.number.inSurah,
@@ -99,6 +136,7 @@ class Controller {
       });
       res.status(200).json({
         name: data.data.name.transliteration.id,
+        number: data.data.number,
         arab: data.data.name.short,
         tafsir: data.data.tafsir.id,
         translation: data.data.name.translation.id,
@@ -106,6 +144,25 @@ class Controller {
       });
     } catch (err) {
       console.log(err);
+    }
+  }
+  static async randomSurah(req, res, next) {
+    try {
+      const random = Math.ceil(Math.random() * 113);
+      const { data } = await axios.get(
+        `https://api.quran.sutanlab.id/surah/${random}`
+      );
+      let randomAyat = Math.floor(Math.random() * data.data.verses.length);
+      let randomSurah = {
+        surah: data.data.name.transliteration.id,
+        ayat: randomAyat + 1,
+        arab: data.data.verses[randomAyat].text.arab,
+        latin: data.data.verses[randomAyat].text.transliteration.en,
+        indonesia: data.data.verses[randomAyat].translation.id,
+      };
+      res.status(200).json(randomSurah);
+    } catch (err) {
+      next(err);
     }
   }
 }

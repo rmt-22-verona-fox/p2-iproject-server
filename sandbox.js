@@ -85,4 +85,24 @@ async function getAll() {
 //   console.log("success send email");
 // });
 // getPrayerTime();
-getAll();
+
+// getAll();
+
+async function getPrayerTime() {
+  try {
+    const { data } = await axios.get(
+      `https://api.pray.zone/v2/times/today.json?longitude=114.8450926&latitude=-3.4514704`
+    );
+    // console.log(data.results.datetime);
+    let obj = {
+      city: data.results.location.timezone,
+      time: data.results.datetime[0].times,
+      date: data.results.datetime[0].date.gregorian,
+    };
+    console.log(obj);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+getPrayerTime();
