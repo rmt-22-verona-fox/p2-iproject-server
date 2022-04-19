@@ -18,24 +18,40 @@ class Controller {
             const payload = {
                 id: loggedInUser.id
             }
-            const accessToken = createToken(payload)
+            const access_token = createToken(payload)
             res.status(200).json({
                 statusCode: 200,
-                accessToken: accessToken,
+                access_token: access_token,
                 email: loggedInUser.email,
+                name: loggedInUser.name
             })
         } catch (err) {
             next(err)
         }
     }
 
-    // static async loginHandler (req, res, next) {
-    //     try{
-
-    //     } catch(err){
-
-    //     }
-    // }
+    static async registerHandler(req, res, next) {
+        try {
+            const { email, password, name, address, phoneNumber } = req.body
+            const newUser = await User.create({
+                email,
+                password,
+                name,
+                address,
+                phoneNumber
+            })
+            res.status(201).json({
+                statusCode: 201,
+                data: {
+                    id: newUser.id,
+                    email: newUser.email,
+                },
+                message: 'User has been created successfully'
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
 }
 
 module.exports = Controller
