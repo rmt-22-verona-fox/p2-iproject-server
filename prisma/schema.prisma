@@ -12,22 +12,22 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  username String @unique
-  email String @unique
-  password String 
-  bio String
+  username String @db.VarChar(50) @unique 
+  email String @db.VarChar(100) @unique
+  password String
+  bio String 
   imageUrl String
-  post Post []
-  threadId Int
-  thread Thread? @relation(fields: [threadId], references: [id])
+  post Post [] 
+  threadId Int ?
+  thread Thread []
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt 
 }
 
 model Post {
   id Int @id @default(autoincrement())
-  title String
-  body String
+  title String @db.VarChar(255)
+  body String @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId Int 
@@ -38,10 +38,12 @@ model Post {
 
 model Thread {
   id Int @id @default(autoincrement())
-  tile String @unique
+  title String @db.VarChar(255) @unique
   content String
   imageUrl String
   userId Int
-  user User?
+  user User @relation(fields: [userId], references: [id])
   post Post []
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
