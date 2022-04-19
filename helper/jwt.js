@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const privatekey = process.env.SECRET;
-console.log();
+
 function tokenCreate(payload) {
   return jwt.sign(payload, privatekey, {
     expiresIn: "1h",
