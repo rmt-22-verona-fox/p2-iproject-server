@@ -83,36 +83,31 @@ class userController {
         Male,
       });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   }
 
   static async addprofile(req, res, next) {
     try {
-      const { name, age, phoenNumber, address, bio, gender } = req.body;
+      const { name, age, phoneNumber, address, bio, gender } = req.body;
+
+      if (!gender) {
+        throw { name: "Please select gender" };
+      }
       let Profile = "";
-      console.log(req.body);
-      const Female = await User.findByPk(req.user.id, {
-        attributes: { exclude: ["createdAt", "updatedAt", "password"] },
-        include: [
-          {
-            model: Profile_Female,
-            attributes: { exclude: ["createdAt", "updatedAt"] },
-          },
-        ],
+      const Female = await Profile_Female.findOne({
+        where: {
+          UserId: req.user.id,
+        },
       });
 
-      const Male = await User.findByPk(req.user.id, {
-        attributes: { exclude: ["createdAt", "updatedAt", "password"] },
-        include: [
-          {
-            model: Profile_Male,
-            attributes: { exclude: ["createdAt", "updatedAt"] },
-          },
-        ],
+      const Male = await Profile_Male.findOne({
+        where: {
+          UserId: req.user.id,
+        },
       });
 
-      if (Female.Profile_Female || Male.Profile_Male) {
+      if (Female || Male) {
         throw { name: "Already have a profile" };
       }
 
@@ -120,15 +115,16 @@ class userController {
         Profile = await Profile_Male.create({
           name,
           age,
-          phoenNumber,
+          phoneNumber,
           address,
           bio,
+          UserId: req.user.id,
         });
       } else if (gender === "female") {
         Profile = await Profile_Female.create({
           name,
           age,
-          phoenNumber,
+          phoneNumber,
           address,
           bio,
           UserId: req.user.id,

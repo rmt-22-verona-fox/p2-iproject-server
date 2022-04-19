@@ -16,6 +16,7 @@ const error = (err, req, res, next) => {
       break;
     case "Email is required":
     case "Password is required":
+    case "Please select gender":
       error = err.name;
       code = 400;
       break;
