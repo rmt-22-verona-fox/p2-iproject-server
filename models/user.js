@@ -1,4 +1,5 @@
 "use strict";
+const { generateHash } = require("../helpers/encryption");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -34,6 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      hooks: {
+        beforeCreate(user, options) {
+          user.password = generateHash(user.password);
+        },
+      },
       sequelize,
       modelName: "User",
     }
