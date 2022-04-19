@@ -32,6 +32,28 @@ class Controller {
         }
     }
 
+    static async sneakersDetail(req, res, next) {
+        try {
+            const { id } = req.params.id
+            let options = {
+                method: 'GET',
+                url: `https://the-sneaker-database.p.rapidapi.com/sneakers/${id}`,
+                headers: {
+                    'X-RapidAPI-Host': 'the-sneaker-database.p.rapidapi.com',
+                    'X-RapidAPI-Key': process.env.X_RapidAPI_Key
+                }
+            }
+
+            // const { data } = await getSneakers(options)
+            // res.status(200).json(data.results)
+
+            const data = JSON.parse(fs.readFileSync('./db/products.json'))
+            res.status(200).json(data)
+        } catch (err) {
+            next(err)
+        }
+    }
+
     static async listBrands(req, res, next) {
         try {
             // const { data } = await getBrands()
