@@ -26,7 +26,6 @@ class Controller {
                 name: loggedInUser.name
             })
         } catch (err) {
-            console.log(err)
             next(err)
         }
     }
