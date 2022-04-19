@@ -1,14 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/dribble')
+const youtubeController = require('../controllers/youtubeController')
 
-router.get('/passing')
+router.get('/dribble', youtubeController.getDribble)
 
-router.get('/finishing')
+router.get('/passing', youtubeController.getPassing)
 
-router.get('/shooting')
+router.get('/finishing', youtubeController.getFinishing)
 
-router.get('footwork')
+router.get('/shooting', youtubeController.getShooting)
+
+router.get('footwork', youtubeController.getFootwork)
 
 module.exports = router
