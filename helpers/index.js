@@ -2,11 +2,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const secretKey = "loegueend";
 
-const hash = (password) => {
+const hashPassword = (password) => {
   return bcrypt.hashSync(password, 8);
 };
 
-const compare = (password, hashPasword) => {
+const comparePassword = (password, hashPasword) => {
   return bcrypt.compareSync(password, hashPasword);
 };
 
@@ -18,4 +18,4 @@ const readToken = (token) => {
   return jwt.verify(token, secretKey);
 };
 
-module.exports = { hash, compare, createToken, readToken };
+module.exports = { hashPassword, comparePassword, createToken, readToken };
