@@ -15,11 +15,36 @@ module.exports = (sequelize, DataTypes) => {
   }
   Profile_Female.init(
     {
-      name: DataTypes.STRING,
-      age: DataTypes.INTEGER,
-      phoneNumber: DataTypes.INTEGER,
-      address: DataTypes.STRING,
-      bio: DataTypes.TEXT,
+      name: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: { msg: "Plese input name" },
+        },
+      },
+      age: {
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: { msg: "Plese input age" },
+        },
+      },
+      phoneNumber: {
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: { msg: "Plese input phone number" },
+        },
+      },
+      address: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: { msg: "Plese input address" },
+        },
+      },
+      bio: {
+        type: DataTypes.TEXT,
+        validate: {
+          notEmpty: { msg: "Plese input bio" },
+        },
+      },
       UserId: DataTypes.INTEGER,
     },
     {
