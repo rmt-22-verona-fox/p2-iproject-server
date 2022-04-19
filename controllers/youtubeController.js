@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_KEY = process.env.YOUTUBE_API_KEY
+const API_KEY = process.env.YOUTUBE_API_KEY;
 class Controller {
   static async getDribble(req, res, next) {
     try {
@@ -13,10 +13,26 @@ class Controller {
             part: "snippet",
             type: "video",
             maxResults: 10,
+            order: "rating",
           },
         }
       );
-      res.status(200).json(response.data);
+
+      const data = response.data.items.map((el) => {
+        const result = {
+          videoId: el.id.videoId,
+          thumbnail: el.snippet.thumbnails.high.url,
+          videoInfo: {
+            title: el.snippet.title,
+            description: el.snippet.description,
+            publishedBy: el.snippet.channelTitle,
+            publishedAt: el.snippet.publishedAt,
+          },
+        };
+        return result;
+      });
+
+      res.status(200).json(data);
     } catch (err) {
       next(err.response.status);
     }
@@ -36,7 +52,22 @@ class Controller {
           },
         }
       );
-      res.status(200).json(response.data);
+
+      const data = response.data.items.map((el) => {
+        const result = {
+          videoId: el.id.videoId,
+          thumbnail: el.snippet.thumbnails.high.url,
+          videoInfo: {
+            title: el.snippet.title,
+            description: el.snippet.description,
+            publishedBy: el.snippet.channelTitle,
+            publishedAt: el.snippet.publishedAt,
+          },
+        };
+        return result;
+      });
+
+      res.status(200).json(data);
     } catch (err) {
       next(err.response.status);
     }
@@ -56,7 +87,22 @@ class Controller {
           },
         }
       );
-      res.status(200).json(response.data);
+
+      const data = response.data.items.map((el) => {
+        const result = {
+          videoId: el.id.videoId,
+          thumbnail: el.snippet.thumbnails.high.url,
+          videoInfo: {
+            title: el.snippet.title,
+            description: el.snippet.description,
+            publishedBy: el.snippet.channelTitle,
+            publishedAt: el.snippet.publishedAt,
+          },
+        };
+        return result;
+      });
+
+      res.status(200).json(data);
     } catch (err) {
       next(err.response.status);
     }
@@ -76,7 +122,22 @@ class Controller {
           },
         }
       );
-      res.status(200).json(response.data);
+
+      const data = response.data.items.map((el) => {
+        const result = {
+          videoId: el.id.videoId,
+          thumbnail: el.snippet.thumbnails.high.url,
+          videoInfo: {
+            title: el.snippet.title,
+            description: el.snippet.description,
+            publishedBy: el.snippet.channelTitle,
+            publishedAt: el.snippet.publishedAt,
+          },
+        };
+        return result;
+      });
+
+      res.status(200).json(data);
     } catch (err) {
       next(err.response.status);
     }
@@ -96,7 +157,22 @@ class Controller {
           },
         }
       );
-      res.status(200).json(response.data);
+
+      const data = response.data.items.map((el) => {
+        const result = {
+          videoId: el.id.videoId,
+          thumbnail: el.snippet.thumbnails.high.url,
+          videoInfo: {
+            title: el.snippet.title,
+            description: el.snippet.description,
+            publishedBy: el.snippet.channelTitle,
+            publishedAt: el.snippet.publishedAt,
+          },
+        };
+        return result;
+      });
+
+      res.status(200).json(data);
     } catch (err) {
       next(err.response.status);
     }

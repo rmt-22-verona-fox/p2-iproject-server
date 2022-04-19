@@ -11,6 +11,6 @@ router.get('/finishing', youtubeController.getFinishing)
 
 router.get('/shooting', youtubeController.getShooting)
 
-router.get('footwork', youtubeController.getFootwork)
+router.get('/footwork', youtubeController.getFootwork)
 
 module.exports = router
