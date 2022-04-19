@@ -25,6 +25,7 @@ const error = (err, req, res, next) => {
       break;
     case "Data not found":
     case "Add profile first":
+    case "Already have a profile":
       error = err.name;
       code = 404;
       break;

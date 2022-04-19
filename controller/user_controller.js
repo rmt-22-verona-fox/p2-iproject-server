@@ -74,15 +74,70 @@ class userController {
         ],
       });
 
-
       if (!Female.Profile_Female || !Male.Profile_Male) {
         throw { name: "Add profile first" };
       }
-      
-        res.status(200).json({
-          Female,
-          Male,
+
+      res.status(200).json({
+        Female,
+        Male,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async addprofile(req, res, next) {
+    try {
+      const { name, age, phoenNumber, address, bio, gender } = req.body;
+      let Profile = "";
+
+      const Female = await User.findByPk(req.user.id, {
+        attributes: { exclude: ["createdAt", "updatedAt", "password"] },
+        include: [
+          {
+            model: Profile_Female,
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+          },
+        ],
+      });
+
+      const Male = await User.findByPk(req.user.id, {
+        attributes: { exclude: ["createdAt", "updatedAt", "password"] },
+        include: [
+          {
+            model: Profile_Male,
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+          },
+        ],
+      });
+
+      if (Female.Profile_Female || Male.Profile_Male) {
+        throw { name: "Already have a profile" };
+      }
+
+      if (gender === "male") {
+        Profile = await Profile_Male.create({
+          name,
+          age,
+          phoenNumber,
+          address,
+          bio,
         });
+      } else if (gender === "female") {
+        Profile = await Profile_Female.create({
+          name,
+          age,
+          phoenNumber,
+          address,
+          bio,
+          UserId: req.user.id,
+        });
+      }
+
+      res.status(200).json({
+        Profile,
+      });
     } catch (err) {
       next(err);
     }
