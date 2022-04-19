@@ -1,4 +1,5 @@
 'use strict';
+const formatDate = require('../helpers/format-date')
 const {
     Model
 } = require('sequelize');
@@ -30,6 +31,12 @@ module.exports = (sequelize, DataTypes) => {
         UserId: DataTypes.INTEGER
     }, {
         sequelize,
+        hooks: {
+            beforeCreate: (instance, options) => {
+                const date = formatDate(new Date(instance.createdAt))
+                instance.invoiceNumber = `INV/${date}/${instance.UserId}`
+            },
+        },
         modelName: 'Invoice',
     });
     return Invoice;
