@@ -12,6 +12,11 @@ const error = (err, req, res, next) => {
         },
       });
       break;
+    case "User Already Bookmark This Surah":
+      res.status(400).json({
+        message: "User Already Bookmark This Surah",
+      });
+      break;
     case "your login is not valid":
     case "email or password invalid":
       res.status(401).json({
@@ -29,11 +34,11 @@ const error = (err, req, res, next) => {
         },
       });
       break;
-    case `Food is not found`:
+    case `Surah is not found`:
       res.status(404).json({
         status: 404,
         error: {
-          message: `Food is not found`,
+          message: `Surah is not found`,
         },
       });
       break;

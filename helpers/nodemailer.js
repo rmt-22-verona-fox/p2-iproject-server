@@ -2,7 +2,7 @@ const axios = require("axios");
 const nodemailer = require("nodemailer");
 const { User } = require("../models/index");
 
-async function sendRandomSurah() {
+async function sendRandomSurah(email) {
   try {
     let configMail = {
       host: "smtp.gmail.com",
@@ -20,11 +20,7 @@ async function sendRandomSurah() {
       `https://api.quran.sutanlab.id/surah/${random}`
     );
     let randomAyat = Math.floor(Math.random() * data.data.verses.length);
-    const users = await User.findAll();
 
-    let email = users.map((el) => {
-      return el.email;
-    });
     let transporter = await nodemailer.createTransport(configMail);
     let mail = {
       to: email,
