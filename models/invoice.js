@@ -17,7 +17,14 @@ module.exports = (sequelize, DataTypes) => {
     Invoice.init({
         itemName: DataTypes.STRING,
         price: DataTypes.INTEGER,
-        size: DataTypes.INTEGER,
+        size: {
+            allowNull: false,
+            type: DataTypes.INTEGER,
+            validate: {
+                notEmpty: { msg: 'Please select your Kicks size' },
+                notNull: { msg: 'Please select your Kicks size' },
+            }
+        },
         quantity: DataTypes.INTEGER,
         invoiceNumber: DataTypes.STRING,
         UserId: DataTypes.INTEGER
