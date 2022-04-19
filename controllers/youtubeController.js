@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_KEY = "AIzaSyCNIKFsbpc9ohOuZFcKglmzD49XyZWPXRs";
+const API_KEY = process.env.YOUTUBE_API_KEY
 class Controller {
   static async getDribble(req, res, next) {
     try {
