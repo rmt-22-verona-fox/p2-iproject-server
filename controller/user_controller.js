@@ -1,4 +1,4 @@
-const { User, Biodata } = require("../models");
+const { User, Profile_Female, Profile_Male } = require("../models");
 const { tokenCreate } = require("../helper/jwt");
 const encrypt = require("../helper/encryption");
 
@@ -54,20 +54,35 @@ class userController {
 
   static async profile(req, res, next) {
     try {
-      const Users = await User.findByPk(req.user.id, {
+      const Female = await User.findByPk(req.user.id, {
         attributes: { exclude: ["createdAt", "updatedAt", "password"] },
         include: [
           {
-            model: Biodata,
+            model: Profile_Female,
             attributes: { exclude: ["createdAt", "updatedAt"] },
           },
         ],
       });
 
-      if (!Users.Biodatatum) {
+      const Male = await User.findByPk(req.user.id, {
+        attributes: { exclude: ["createdAt", "updatedAt", "password"] },
+        include: [
+          {
+            model: Profile_Male,
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+          },
+        ],
+      });
+
+
+      if (!Female.Profile_Female || !Male.Profile_Male) {
         throw { name: "Add profile first" };
       }
-      res.status(200).json(Users);
+      
+        res.status(200).json({
+          Female,
+          Male,
+        });
     } catch (err) {
       next(err);
     }
