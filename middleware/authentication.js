@@ -4,10 +4,8 @@ const { User } = require("../models");
 const authentication = async (req, res, next) => {
   try {
     const { access_token } = req.headers;
-
-    const payload = tokenVerify(access_token);
-
-    const findUser = await User.findByPk(payload.id);
+    const payloads = tokenVerify(access_token);
+    const findUser = await User.findByPk(payloads.id);
 
     if (!findUser) {
       throw { name: "Invalid token" };

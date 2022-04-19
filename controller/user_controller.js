@@ -63,9 +63,11 @@ class userController {
           },
         ],
       });
-      res.status(200).json({
-        Users,
-      });
+
+      if (!Users.Biodatatum) {
+        throw { name: "Add profile first" };
+      }
+      res.status(200).json(Users);
     } catch (err) {
       next(err);
     }
