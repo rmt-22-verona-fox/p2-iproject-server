@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       phoenNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       address: {
         type: Sequelize.STRING,

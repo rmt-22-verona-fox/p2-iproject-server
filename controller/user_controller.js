@@ -63,7 +63,7 @@ class userController {
           },
         ],
       });
-
+      console.log(Female);
       const Male = await User.findByPk(req.user.id, {
         attributes: { exclude: ["createdAt", "updatedAt", "password"] },
         include: [
@@ -83,7 +83,7 @@ class userController {
         Male,
       });
     } catch (err) {
-      next(err);
+      console.log(err);
     }
   }
 
@@ -91,7 +91,7 @@ class userController {
     try {
       const { name, age, phoenNumber, address, bio, gender } = req.body;
       let Profile = "";
-
+      console.log(req.body);
       const Female = await User.findByPk(req.user.id, {
         attributes: { exclude: ["createdAt", "updatedAt", "password"] },
         include: [
