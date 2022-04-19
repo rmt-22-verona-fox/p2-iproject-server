@@ -3,6 +3,7 @@ const { User, Bookmark } = require("../models/index");
 const axios = require("axios");
 const { compareHash } = require("../helpers/bcryptjs");
 const { getToken } = require("../helpers/jwt");
+const { sendRandomSurah } = require("../helpers/nodemailer");
 
 class Controller {
   static async register(req, res, next) {
@@ -46,8 +47,8 @@ class Controller {
         id: user.id,
         email: user.email,
       };
-
       const token = getToken(payload);
+      //   sendRandomSurah(user.email);
       res.status(200).json({
         statusCode: 200,
         message: "Success Login",
@@ -111,10 +112,54 @@ class Controller {
       next(err);
     }
   }
+  static async addBookmark(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { data } = await axios.get(
+        `https://api.quran.sutanlab.id/surah/${id}`
+      );
+      const bookmark = await Bookmark.findOne({
+        where: {
+          UserId: req.user.id,
+          SurahId: id,
+        },
+      });
+      console.log(bookmark);
+      if (bookmark) {
+        throw { name: "User Already Bookmark This Surah" };
+      }
+      const create = await Bookmark.create({
+        UserId: req.user.id,
+        SurahId: id,
+      });
+      if (!create) {
+        throw { name: `Surah is not found` };
+      }
+
+      res.status(201).json({
+        message: "success add bookmark",
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
   static async deleteBookmarks(req, res, next) {
     try {
       const { id } = req.params;
-    } catch (err) {}
+      const deleted = await Bookmark.destroy({
+        where: {
+          id,
+        },
+      });
+      if (!deleted) {
+        throw { name: "Bookmark is not found" };
+      }
+      res.status(200).json({
+        message: "Success Delete Bookmark",
+      });
+    } catch (err) {
+      next(err);
+    }
   }
   static async detailSurah(req, res, next) {
     try {
@@ -161,6 +206,24 @@ class Controller {
         indonesia: data.data.verses[randomAyat].translation.id,
       };
       res.status(200).json(randomSurah);
+    } catch (err) {
+      next(err);
+    }
+  }
+  static async getPrayerTime(req, res, next) {
+    try {
+      const { long, lat } = req.query;
+      const { data } = await axios.get(
+        `https://api.pray.zone/v2/times/today.json?longitude=${long}&latitude=${lat}`
+      );
+      console.log(data);
+      //   let obj = {
+      //     // timezone: data.results.location.timezone,
+      //     time: data.results.datetime[0].times,
+      //     date: data.results.datetime[0].date.gregorian,
+      //   };
+      //   console.log(obj);
+      //   res.status(200).json(obj);
     } catch (err) {
       next(err);
     }
