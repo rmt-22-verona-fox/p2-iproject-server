@@ -1,4 +1,6 @@
-const { User } = require("../models");
+const { User, Biodata } = require("../models");
+const { tokenCreate } = require("../helper/jwt");
+const encrypt = require("../helper/encryption");
 
 class userController {
   static async register(req, res, next) {
@@ -13,7 +15,6 @@ class userController {
     }
   }
 
-  
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
@@ -34,7 +35,7 @@ class userController {
         throw { name: "Invalid email/password" };
       }
 
-      if (!bcrypt.compareSync(password, Users.password)) {
+      if (!encrypt(password, Users.password)) {
         throw { name: "Invalid email/password" };
       }
 
@@ -42,8 +43,28 @@ class userController {
         id: Users.id,
         email: Users.email,
       });
+
       res.status(200).json({
         access_token: token,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async profile(req, res, next) {
+    try {
+      const Users = await User.findByPk(req.user.id, {
+        attributes: { exclude: ["createdAt", "updatedAt", "password"] },
+        include: [
+          {
+            model: Biodata,
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+          },
+        ],
+      });
+      res.status(200).json({
+        Users,
       });
     } catch (err) {
       next(err);
