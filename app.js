@@ -6,8 +6,6 @@ const app = express()
 const cors = require('cors')
 const port = process.env.PORT || 3000
 const routes = require('./routes/index')
-const getBrands = require('./db/brands')
-const getSneakers = require('./db/products')
 const fs = require('fs')
 
 app.use(express.urlencoded({ extended: true }))
