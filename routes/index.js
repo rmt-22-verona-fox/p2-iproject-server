@@ -9,6 +9,6 @@ const errorHandler = require('../middlewares/errorhandler')
 router.use('/users', users)
 router.use('/products', products)
 router.use(authentication)
-router.use('./invoice', invoice)
+router.use('/invoice', invoice)
 router.use(errorHandler)
 module.exports = router
