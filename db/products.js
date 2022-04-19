@@ -6,7 +6,7 @@ const options = {
     params: { limit: '100' },
     headers: {
         'X-RapidAPI-Host': 'the-sneaker-database.p.rapidapi.com',
-        'X-RapidAPI-Key': '6eb8efa9bbmsh79c36eeb2171719p13b54ajsna819efc9f387'
+        'X-RapidAPI-Key': process.env.X_RapidAPI_Key
     }
 };
 

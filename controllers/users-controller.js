@@ -1,5 +1,6 @@
 const { User } = require('../models/index')
 const { createToken } = require('../helpers/helper-jwt')
+const { comparePassword } = require('../helpers/helper-password')
 class Controller {
     static async loginHandler(req, res, next) {
         try {
@@ -36,3 +37,5 @@ class Controller {
     //     }
     // }
 }
+
+module.exports = Controller

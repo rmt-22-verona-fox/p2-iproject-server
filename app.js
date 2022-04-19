@@ -3,8 +3,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3000
 const cors = require('cors')
+const port = process.env.PORT || 3000
+const routes = require('./routes/index')
 const getBrands = require('./db/brands')
 const getSneakers = require('./db/products')
 const fs = require('fs')
@@ -12,8 +13,8 @@ const fs = require('fs')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
+app.use('/', routes)
 
-app.post('/login', )
 app.get('/brands', async(req, res, next) => {
     try {
         // const { data } = await getBrands()
