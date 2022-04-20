@@ -24,4 +24,7 @@ user.post(
   upload.single("file"),
   userController.addprofile
 );
+user.get("/listprofile", authentication, userController.listProfile);
+user.post("/addpartner", authentication, userController.addPartner);
+
 module.exports = user;

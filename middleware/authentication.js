@@ -1,17 +1,20 @@
 const { tokenVerify } = require("../helper/jwt");
-const { User } = require("../models");
+const { User, Profile } = require("../models");
 
 const authentication = async (req, res, next) => {
   try {
     const { access_token } = req.headers;
     const payloads = tokenVerify(access_token);
-    const findUser = await User.findByPk(payloads.id);
+    const findUser = await User.findByPk(payloads.id, {
+      include: [Profile],
+    });
 
     if (!findUser) {
       throw { name: "Invalid token" };
     } else {
       req.user = {
         id: findUser.id,
+        gender: findUser.Profile.gender,
       };
     }
     next();

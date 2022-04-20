@@ -90,6 +90,45 @@ class userController {
       next(err);
     }
   }
+
+  static async listProfile(req, res, next) {
+    try {
+      let Users = "";
+      if (req.user.gender === "male") {
+        Users = await Profile.findAll({
+          where: {
+            gender: "female",
+          },
+        });
+      } else {
+        Users = await Profile.findAll({
+          where: {
+            gender: "male",
+          },
+        });
+      }
+      if (!Users) {
+        throw { name: "Data not found" };
+      }
+      res.status(200).json(Users);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async addPartner(req, res, next) {
+    try {
+      const { id } = req.user;
+      const { ProfileId } = req.body;
+      const partner = await Partner.create({
+        UserId: id,
+        ProfileId,
+      });
+      res.status(201).json(partner);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = userController;
