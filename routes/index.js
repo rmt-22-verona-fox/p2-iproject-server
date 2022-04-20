@@ -10,5 +10,5 @@ router.post('/login', ControllerAuth.login)
 router.use(authentication)
 router.get('/populars', ControllerTmdb.getPopular)
 router.get('/nowPlaying', ControllerTmdb.getNowPlaying)
-
+router.get('/upcoming', ControllerTmdb.getUpcoming)
 module.exports = router
