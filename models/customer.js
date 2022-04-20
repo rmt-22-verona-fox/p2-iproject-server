@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { hashPassword } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class Customer extends Model {
     /**
@@ -15,12 +16,43 @@ module.exports = (sequelize, DataTypes) => {
   }
   Customer.init(
     {
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      hands: DataTypes.INTEGER,
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Email cannot be empty",
+          },
+          notNull: {
+            msg: "Email cannot be empty",
+          },
+          isEmail: {
+            msg: "Email is not valid",
+          },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: {
+            args: [6, 15],
+            msg: "Password must be atleast between 5 to 15 characters",
+          },
+        },
+      },
+      hands: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
     },
     {
       sequelize,
+      hooks: {
+        beforeCreate(instance, options) {
+          instance.password = hashPassword(instance.password);
+        },
+      },
       modelName: "Customer",
     }
   );

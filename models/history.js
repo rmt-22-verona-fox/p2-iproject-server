@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Customers, { foreignKey: "CustomerId" });
-      this.belongsTo(models.Events, { foreignKey: "EventId" });
+      this.belongsTo(models.Customer, { foreignKey: "CustomerId" });
+      this.belongsTo(models.Event, { foreignKey: "EventId" });
     }
   }
   History.init(
