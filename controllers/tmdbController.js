@@ -29,7 +29,29 @@ class Controller {
     }
   }
 
-
+  static async getNowPlaying(req, res){
+      try {
+        const response = await axios({
+            url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=en-US&page=1`,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          let data = response.data.results.map((el) => {
+            let obj = {
+              title: el.title,
+              imageUrl: el.poster_path,
+              synopsis: el.overview,
+              rating: el.vote_average,
+            };
+            return obj;
+          });
+    
+          res.status(200).json(data);
+      } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+      }
+  }
 }
 
 module.exports = Controller;
