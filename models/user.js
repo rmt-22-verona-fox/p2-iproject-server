@@ -29,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: 'Email is required'
+        },
+        isEmail: {
+          msg: 'Invalid email format'
         }
       }
     },
@@ -41,7 +44,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: 'Password is required'
-        }
+        },
+        isLengthMinimumEight(value) {
+          if (value.length < 8 && value.length > 0) {
+            throw new Error("Password length minimum are 8 characters");
+          }
+        },
       }
     },
   }, {
