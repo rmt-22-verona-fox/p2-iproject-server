@@ -20,9 +20,7 @@ module.exports = class Controller {
           stats: data.stats.map((el) => el.base_stat),
         };
         myPokemons[i].dataValues.detail = pokemonDetail;
-        console.log(pokemonDetail);
       }
-      console.log(myPokemons);
       res.status(200).json(myPokemons);
     } catch (err) {
       next(err);
@@ -31,12 +29,7 @@ module.exports = class Controller {
 
   static async add(req, res, next) {
     try {
-      console.log(req.params);
       const { PokemonId } = req.params;
-      console.log({
-        UserId: req.user.id,
-        PokemonId,
-      });
       const newPokemon = await MyPokemon.create({
         UserId: req.user.id,
         PokemonId,
