@@ -5,14 +5,15 @@ const { generateToken } = require('../helpers/helperJwt')
 class AuthenticationUser {
   static async userRegister(req, res, next) {
     try {
-      const { email, password } = req.body;
+      const { email, password, firstName, lastName, location } = req.body;
       const newUser = await User.create({
-        email, password
+        email, password, firstName, lastName, location
       });
 
       res.status(201).json({
         id: newUser.id,
         email: newUser.email,
+        fullName: `${newUser.firstName} ${newUser.lastName}`
       });
     } catch (err) {
       next(err);
