@@ -3,7 +3,10 @@ module.exports = (err, req, res, next) => {
     case "SequelizeValidationError":
     case "SequelizeUniqueConstraintError":
       res.status(400).json({
-        message: err.errors[0].message,
+        errors: err.errors.map(({ path, message }) => ({
+          type: path,
+          message: message,
+        })),
       });
       break;
 
@@ -21,13 +24,13 @@ module.exports = (err, req, res, next) => {
 
     case "LoginValidationError":
       res.status(400).json({
-        message: err.message,
+        message: "Email/password harus diisi",
       });
       break;
 
     case "UserNotValid":
       res.status(401).json({
-        message: "Invalid email/password",
+        message: "Email/password salah",
       });
       break;
 

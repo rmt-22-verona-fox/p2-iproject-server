@@ -155,7 +155,7 @@ body {font-family: 'Muli', sans-serif;}
     <tbody>
       <tr>
         <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-          <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:10px;" width="300" alt="" data-proportionally-constrained="true" data-responsive="false" src="https://i.ibb.co/X5wHCWW/travelio-logo-footer.png" height="300">
+          <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:10px;" width="300" alt="" data-proportionally-constrained="true" data-responsive="false" src="https://i.ibb.co/TT7XqYg/Travelio-Logo-Footer-250-220px.png" height="250">
         </td>
       </tr>
     </tbody>

@@ -1,6 +1,6 @@
 const { User } = require("../models");
 const { verifyPassword } = require("../helpers/bcrypt");
-const { generateToken, verifyToken } = require("../helpers/jwt");
+const { generateToken } = require("../helpers/jwt");
 
 class AuthController {
   static async register(req, res, next) {

@@ -1,4 +1,4 @@
-# Travelio - iProject
+# Travel10 - iProject
 
 ## Authentication API
 
@@ -95,7 +95,7 @@ _400 - Bad Request_
 
 ```json
 {
-  "message": "Email/Password is required"
+  "message": "Email/password harus diisi"
 }
 ```
 
@@ -105,7 +105,7 @@ _401 - Unauthorized_
 
 ```json
 {
-  "message": "Invalid email/password"
+  "message": "Email/password salah"
 }
 ```
 
@@ -422,7 +422,7 @@ _200 - OK_
 
 ```json
 {
-  "message": "Kamu belum pernah melakukan perjalanan bersama Travelio"
+  "message": "Kamu belum pernah melakukan perjalanan bersama Travel10"
 }
 ```
 

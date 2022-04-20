@@ -24,7 +24,7 @@ class TransactionController {
 
       if (!transactionHistory.length) {
         res.status(200).json({
-          message: "Kamu belum pernah melakukan perjalanan bersama Travelio",
+          message: "Kamu belum pernah melakukan perjalanan bersama Travel10",
         });
       } else {
         res.status(200).json(transactionHistory);
@@ -54,11 +54,10 @@ class TransactionController {
   static async payment(req, res, next) {
     try {
       // res.header("Authorization", process.env.MIDTRANS_SECRET);
-
       let parameter = {
         transaction_details: {
-          order_id: "123",
-          gross_amount: 10000,
+          order_id: "orderid_2",
+          gross_amount: 30000,
         },
       };
 

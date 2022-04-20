@@ -30,11 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Fullname is required",
+            msg: "Nama lengkap harus diisi",
           },
           isTwoWords(value) {
             if (value.trim().split(" ").length < 2) {
-              throw new Error("Fullname should contain firstname and lastname");
+              throw new Error("Nama lengkap harus berisikan dua kata");
             }
           },
         },
@@ -43,14 +43,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: {
-          msg: "Email address must be unique",
+          msg: "Alamat email harus unik",
         },
         validate: {
           notNull: {
-            msg: "Email address is required",
+            msg: "Alamat email harus diisi",
           },
           isEmail: {
-            msg: "Email address format is invalid",
+            msg: "Alamat email tidak valid",
           },
         },
       },
@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Password is required",
+            msg: "Kata sandi harus diisi",
           },
         },
       },
@@ -98,16 +98,16 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.afterCreate(async (instance, options) => {
     /* VERIFICATION MAIL WITH TWILIO SENDGRID */
-    const sendgridMsg = {
-      to: instance.email,
-      from: "diazlinggaputra@gmail.com",
-      subject: "Kode Verifikasi Travelio",
-      html: content(
-        instance.fullName.trim().split(" ")[0],
-        instance.verificationCode
-      ),
-    };
-    await sgMail.send(sendgridMsg);
+    // const sendgridMsg = {
+    //   to: instance.email,
+    //   from: "diazlinggaputra@gmail.com",
+    //   subject: "Kode Verifikasi Travel10",
+    //   html: content(
+    //     instance.fullName.trim().split(" ")[0],
+    //     instance.verificationCode
+    //   ),
+    // };
+    // await sgMail.send(sendgridMsg);
   });
   return User;
 };
