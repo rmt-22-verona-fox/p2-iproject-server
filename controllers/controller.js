@@ -1,7 +1,7 @@
-const customer = require("../models/customer")
 const {Customer, Ticket} = require('../models')
 const { verifyPassword } = require("../helpers/bcrypt")
 const { tokenGenerator } = require("../helpers/jwt")
+const nodemailer = require('nodemailer')
 
 class Controller {
     static async register(req, res, next) {
@@ -56,7 +56,7 @@ class Controller {
                     CustomerId: req.user.id
                 }
             })
-            if (findTicket) throw {name: 'ALREADY_BOOKED'}
+            // if (findTicket) throw {name: 'ALREADY_BOOKED'}
             const newTicket = await Ticket.create({
                 hotel,
                 lat: +lat,
@@ -68,6 +68,32 @@ class Controller {
                 checkIn,
                 checkOut
             })
+            let transporter = nodemailer.createTransport({
+                service: "hotmail",
+                auth: {
+                    user: "narutosakura15@outlook.com",
+                    pass: "Narutosasuke"
+                }
+            });
+
+            let mailOptions = {
+                from: 'narutosakura15@outlook.com',
+                to: req.user.email,
+                subject: 'Test masuk nodemailer',
+                text: `You have already booked ticket and this your ticket information
+                Email to : ${req.user.email}
+                Here is some information for you regarding the Hotel
+                Hotel: ${newTicket.hotel}
+                Hotel Class : ${newTicket.hotelClass}
+                Price : ${newTicket.price}
+                Location : latitude ${newTicket.lat} / longitude ${newTicket.lng}
+                `
+            };
+
+            transporter.sendMail(mailOptions, (err, info) => {
+                if (err) console.log(err);
+            });
+
             res.status(201).json(newTicket)
         } catch (error) {
             next(error)
