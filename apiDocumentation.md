@@ -85,6 +85,7 @@ _200 - OK_
         "city": String,
         "bio": String,
         "profilePicture": String,
+        "isVerified": Boolean
     }
 }
 ```
@@ -145,7 +146,7 @@ _200 - OK_
 
 ```json
 {
-  "message": "Your email has been verified"
+  "message": "Email berhasil diverifikasi"
 }
 ```
 
@@ -155,7 +156,7 @@ _400 - Bad Request_
 
 ```json
 {
-  "message": "Enter a verification code"
+  "message": "Kode verifikasi harus diisi"
 }
 ```
 
@@ -165,7 +166,7 @@ _400 - Bad Request_
 
 ```json
 {
-  "message": "Your verification code is invalid"
+  "message": "Kode verifikasi salah"
 }
 ```
 
@@ -434,7 +435,7 @@ _200 - OK_
 
 **_Description_**
 
-- Create a a new package checkout
+- Create a new package checkout
 
 **_Request_**
 
@@ -443,7 +444,9 @@ _200 - OK_
 ```json
 {
 	"UserId": Integer,
-  "PackageId": Integer
+  "PackageId": Integer,
+  "checkoutDate": Date,
+  "paymentStatus": true,
 }
 ```
 
@@ -455,14 +458,59 @@ _200 - OK_
 
 ```json
 {
-  "id": 7,
-  "UserId": 6,
-  "PackageId": 1,
-  "quantity": 1,
-  "paymentStatus": false,
-  "checkoutDate": "2022-04-18T01:16:09.718Z",
-  "updatedAt": "2022-04-18T01:16:09.719Z",
-  "createdAt": "2022-04-18T01:16:09.719Z"
+  "id": Integer,
+  "UserId": Integer,
+  "PackageId": Integer,
+  "quantity": Integer,
+  "paymentStatus": true,
+  "checkoutDate": Date,
+  "updatedAt": Date,
+  "createdAt": Date,
+}
+```
+
+_403 - Forbidden_
+
+- **Body**
+
+```json
+{
+  "message": "Kamu belum melakukan verifikasi email"
+}
+```
+
+---
+
+3. **Make a payment**
+
+`POST profile/payment`
+
+**_Description_**
+
+- Finish a payment
+
+**_Request_**
+
+- **Body**
+
+```json
+{
+	"amount": Integer,
+  "fullName": String,
+  "email": String,
+}
+```
+
+**_Response_**
+
+_200 - OK_
+
+- **Body**
+
+```json
+{
+  "token": <Midtrans payment gateway token>,
+  "redirect_url": <Midtrans payment gateway redirect url>,
 }
 ```
 

@@ -59,13 +59,60 @@ class PackageController {
       res.status(200).json(categories);
     } catch (err) {
       next(err);
-    } finally {
-      client.close();
     }
   }
 
   static async testimonies(req, res, next) {
     try {
+      await client.connect();
+
+      const { destination } = req.query;
+
+      if (!client) {
+        throw {
+          name: "MongoDBConnectionError",
+          message: "Mongo DB connection error",
+        };
+      }
+
+      const db = client.db("travelio");
+
+      const collection = db.collection("testimonies");
+
+      let testimonies;
+      if (destination) {
+        testimonies = await collection
+          .aggregate([
+            {
+              $match: {
+                destination,
+              },
+            },
+            {
+              $limit: 4,
+            },
+          ])
+          .toArray();
+      } else {
+        testimonies = await collection
+          .aggregate([
+            {
+              $sample: { size: 4 },
+            },
+          ])
+          .toArray();
+      }
+
+      res.status(200).json(testimonies);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async store(req, res, next) {
+    try {
+      const { review, rating, destination } = req.body;
+
       await client.connect();
 
       if (!client) {
@@ -79,13 +126,19 @@ class PackageController {
 
       const collection = db.collection("testimonies");
 
-      const testimonies = await collection.find({}).toArray();
+      const testimonyData = await collection.insertOne({
+        fullName: req.user.fullName,
+        imageUrl: req.user.imageUrl,
+        city: req.user.city,
+        review,
+        rating,
+        destination,
+        checkoutDate: new Date(),
+      });
 
-      res.status(200).json(testimonies);
+      res.status(200).json(testimonyData);
     } catch (err) {
       next(err);
-    } finally {
-      client.close();
     }
   }
 

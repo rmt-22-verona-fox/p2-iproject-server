@@ -25,6 +25,8 @@ module.exports = async (req, res, next) => {
       id: userAuthenticated.id,
       fullName: userAuthenticated.fullName,
       email: userAuthenticated.email,
+      city: userAuthenticated.city,
+      imageUrl: userAuthenticated.profilePicture,
       verificationStatus: userAuthenticated.isVerified,
       verificationCode: userAuthenticated.verificationCode.toLowerCase(),
     };

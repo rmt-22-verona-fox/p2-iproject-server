@@ -61,7 +61,6 @@ module.exports = (sequelize, DataTypes) => {
       paymentStatus: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false,
         validate: {
           notNull: {
             msg: "Transaction status is required",

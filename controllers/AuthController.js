@@ -9,8 +9,10 @@ class AuthController {
         fullName: req.body?.fullName || null,
         email: req.body?.email || null,
         password: req.body?.password || null,
-        city: req.body?.city || null,
-        bio: req.body?.bio || null,
+        city: req.body?.city || "Bandung, Jawa Barat",
+        bio:
+          req.body?.bio ||
+          "Saya sangat senang sekali traveling ke berbagai tempat apalagi dengan tempat tempat seperti pegunungan",
       };
 
       const userCreatedData = await User.create(userInputForm);
@@ -74,6 +76,7 @@ class AuthController {
           city: matchingUser.city,
           bio: matchingUser.bio,
           profilePicture: matchingUser.profilePicture,
+          isVerified: matchingUser.isVerified,
         },
       });
     } catch (err) {
@@ -88,7 +91,7 @@ class AuthController {
       if (!verificationCode) {
         throw {
           name: "EmailVerificationError",
-          message: "Enter a verification code",
+          message: "Kode verifikasi harus diisi",
         };
       }
 
@@ -105,12 +108,12 @@ class AuthController {
         );
 
         res.status(200).json({
-          message: "Your email has been verified",
+          message: "Email berhasil diverifikasi",
         });
       } else if (verificationCode.toLowerCase() !== req.user.verificationCode) {
         throw {
           name: "EmailVerificationError",
-          message: "Your verification code is invalid",
+          message: "Kode verifikasi salah",
         };
       }
     } catch (err) {
