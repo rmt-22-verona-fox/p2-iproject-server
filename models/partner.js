@@ -24,5 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Partner",
     }
   );
+  Partner.beforeCreate((instance, options) => {
+    instance.status = "pending";
+  });
   return Partner;
 };
