@@ -4,6 +4,7 @@ const userController = require("../controller/user_controller");
 const authentication = require("../middleware/authentication");
 const path = require("path");
 const multer = require("multer");
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./images");
@@ -26,5 +27,4 @@ user.post(
   upload.single("file"),
   userController.addprofile
 );
-
 module.exports = user;
