@@ -37,14 +37,9 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      SourceId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Sources',
-          key: 'id'
-        },
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
+      source: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdDate: {
         type: Sequelize.DATE,

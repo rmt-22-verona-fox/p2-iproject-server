@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       MyApplication.belongsTo(models.User)
-      MyApplication.belongsTo(models.Source)
     }
   }
   MyApplication.init({
@@ -83,7 +82,18 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    SourceId: DataTypes.INTEGER,
+    source: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Source is required'
+        },
+        notEmpty: {
+          msg: 'Source is required'
+        }
+      }
+    },
     createdDate: {
       type: DataTypes.DATE,
       allowNull: false,
