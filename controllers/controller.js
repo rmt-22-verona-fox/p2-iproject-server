@@ -6,10 +6,12 @@ const { tokenGenerator } = require("../helpers/jwt")
 class Controller {
     static async register(req, res, next) {
         try {
-            const {email, password} = req.body
+            const {email, password, phoneNumber, address} = req.body
             const newCustomer = await Customer.create({
                 email,
-                password
+                password,
+                phoneNumber,
+                address
             })
             res.status(201).json({
                 id: newCustomer.id,
