@@ -325,7 +325,64 @@ _500 - Internal Server Error_
 
 ---
 
-5. **Fetch a specific package**
+5. **Post travel testimony**
+
+`POST packages/testimonies`
+
+**_Description_**
+
+- Posting a travel testimony
+
+- **Headers**
+
+```json
+{
+  "access_token" : <your access token>
+}
+```
+
+**_Request_**
+
+- **Body**
+
+````json
+
+{
+    "fullName": String,
+    "imageUrl": String,
+    "city": String,
+    "rating": Number,
+    "review": String,
+    "destination": String,
+    "checkoutDate": String,
+}
+
+**_Response_**
+
+_200 - OK_
+
+- **Body**
+
+```json
+{
+  "acknowledged": true,
+  "insertedId": Number
+}
+````
+
+_500 - Internal Server Error_
+
+- **Body**
+
+```json
+{
+  "message": "Mongo DB connection error"
+}
+```
+
+---
+
+6. **Fetch a specific package**
 
 `GET packages/:id`
 

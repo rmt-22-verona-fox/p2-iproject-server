@@ -59,7 +59,7 @@ class TransactionController {
       let parameter = {
         transaction_details: {
           order_id: "TRAVEL10_" + Math.floor(Math.random() * 1000000),
-          gross_amount: 1,
+          gross_amount: amount,
         },
         customer_details: {
           first_name: fullName.split(" ")[0],
