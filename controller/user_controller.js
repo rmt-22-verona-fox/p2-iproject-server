@@ -1,6 +1,6 @@
-const { User, Profile_Female, Profile_Male } = require("../models");
+const { User, Profile, Partner } = require("../models");
 const { tokenCreate } = require("../helper/jwt");
-const encrypt = require("../helper/encryption");
+const { decryption } = require("../helper/encryption");
 
 class userController {
   static async register(req, res, next) {
@@ -35,7 +35,7 @@ class userController {
         throw { name: "Invalid email/password" };
       }
 
-      if (!encrypt(password, Users.password)) {
+      if (!decryption(password, Users.password)) {
         throw { name: "Invalid email/password" };
       }
 
@@ -54,34 +54,15 @@ class userController {
 
   static async profile(req, res, next) {
     try {
-      const Female = await User.findByPk(req.user.id, {
-        attributes: { exclude: ["createdAt", "updatedAt", "password"] },
-        include: [
-          {
-            model: Profile_Female,
-            attributes: { exclude: ["createdAt", "updatedAt"] },
-          },
-        ],
-      });
-      console.log(Female);
-      const Male = await User.findByPk(req.user.id, {
-        attributes: { exclude: ["createdAt", "updatedAt", "password"] },
-        include: [
-          {
-            model: Profile_Male,
-            attributes: { exclude: ["createdAt", "updatedAt"] },
-          },
-        ],
-      });
+      const { id } = req.user;
 
-      if (!Female.Profile_Female || !Male.Profile_Male) {
+      const Users = await User.findByPk(id, {
+        include: [Profile],
+      });
+      if (!Users.Profile) {
         throw { name: "Add profile first" };
       }
-
-      res.status(200).json({
-        Female,
-        Male,
-      });
+      res.status(200).json(Users);
     } catch (err) {
       next(err);
     }
@@ -89,47 +70,17 @@ class userController {
 
   static async addprofile(req, res, next) {
     try {
-      const { name, age, phoneNumber, address, bio, gender } = req.body;
+      const { id } = req.user;
+      const { name, gender, age, phoneNumber, address } = req.body;
 
-      if (!gender) {
-        throw { name: "Please select gender" };
-      }
-      let Profile = "";
-      const Female = await Profile_Female.findOne({
-        where: {
-          UserId: req.user.id,
-        },
+      await Profile.create({
+        name,
+        gender,
+        age,
+        phoneNumber,
+        address,
+        UserId: id,
       });
-
-      const Male = await Profile_Male.findOne({
-        where: {
-          UserId: req.user.id,
-        },
-      });
-
-      if (Female || Male) {
-        throw { name: "Already have a profile" };
-      }
-
-      if (gender === "male") {
-        Profile = await Profile_Male.create({
-          name,
-          age,
-          phoneNumber,
-          address,
-          bio,
-          UserId: req.user.id,
-        });
-      } else if (gender === "female") {
-        Profile = await Profile_Female.create({
-          name,
-          age,
-          phoneNumber,
-          address,
-          bio,
-          UserId: req.user.id,
-        });
-      }
 
       res.status(200).json({
         Profile,

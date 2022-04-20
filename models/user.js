@@ -1,6 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
-const bcrypt = require("bcryptjs");
+const { encrypt } = require("../helper/encryption");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -10,14 +10,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasOne(models.Profile_Male);
-      this.hasOne(models.Profile_Female);
+      this.hasOne(models.Profile);
     }
   }
   User.init(
     {
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: { msg: "Email is required" },
+          isEmail: { msg: "Invalid email format" },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: { msg: "Password is required" },
+        },
+      },
     },
     {
       sequelize,
@@ -25,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   User.beforeCreate((user, options) => {
-    user.password = bcrypt.hashSync(user.password, 8);
+    user.password = encrypt(user.password);
   });
   return User;
 };

@@ -1,8 +1,10 @@
 const bcrypt = require("bcryptjs");
 
-const encrypt = (password, passwordUser) => {
+const decryption = (password, passwordUser) => {
   return bcrypt.compareSync(password, passwordUser);
 };
 
-
-module.exports = encrypt;
+const encrypt = (password) => {
+  return bcrypt.hashSync(password, 8);
+};
+module.exports = { encrypt, decryption };
