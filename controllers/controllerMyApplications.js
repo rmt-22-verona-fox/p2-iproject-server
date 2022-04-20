@@ -43,6 +43,25 @@ class ControllerMyApplications {
     }
   }
 
+  static async deleteMyApplications(req, res, next) {
+    try {
+      const { id } = req.params
+      const myApplication = await MyApplication.findByPk(id)
+
+      if(!myApplication) {
+        throw { name: 'YOUR_APPLICATION_NOT_FOUND', statusCode: 404 }
+      }
+
+      await MyApplication.destroy({where:{id}})
+
+      res.status(200).json({
+        message: `Success deleted application with ID ${id}`
+      })
+    } catch (err) {
+      next(err)
+    }
+  }
+
 }
 
 module.exports = ControllerMyApplications

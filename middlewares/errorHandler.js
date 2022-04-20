@@ -46,17 +46,17 @@ module.exports = (err, req, res, next) => {
         message: "Job not found",
       });
       break;
-    case "PRODUCT_NOT_FOUND":
+    case "YOUR_APPLICATION_NOT_FOUND":
       res.status(err.statusCode).json({
         message: "Product not found",
       });
       break;
-    case "EMAIL_CUSTOMER_REQUIRED":
+    case "EMAIL_USER_REQUIRED":
       res.status(err.statusCode).json({
         message: "Email is required",
       });
       break;
-    case "PASSWORD_CUSTOMER_REQUIRED":
+    case "PASSWORD_USER_REQUIRED":
       res.status(err.statusCode).json({
         message: "Password is required",
       });
