@@ -17,6 +17,7 @@ const error = (err, req, res, next) => {
     case "Email is required":
     case "Password is required":
     case "Please select gender":
+    case "Please upload photo":
       error = err.name;
       code = 400;
       break;
@@ -36,6 +37,7 @@ const error = (err, req, res, next) => {
       break;
     case "Invalid token":
     case "JsonWebTokenError":
+    case "TokenExpiredError":
       error = "Invalid token";
       code = 401;
       break;
