@@ -37,9 +37,7 @@ module.exports = (err, req, res, next) => {
       break;
     case "WRONG_EMAIL_PASSWORD":
       res.status(err.statusCode).json({
-        error: {
-          message: "Invalid email or password",
-        },
+        message: "Invalid email or password",
       });
       break;
     case "Forbidden":
@@ -58,16 +56,12 @@ module.exports = (err, req, res, next) => {
       break;
     case "EMAIL_CUSTOMER_REQUIRED":
       res.status(err.statusCode).json({
-        error: {
-          message: "Email is required",
-        },
+        message: "Email is required",
       });
       break;
     case "PASSWORD_CUSTOMER_REQUIRED":
       res.status(err.statusCode).json({
-        error: {
-          message: "Password is required",
-        },
+        message: "Password is required",
       });
       break;
     case "DUPLICATE_PRODUCT":
