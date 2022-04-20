@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000;
 const router = require("./router/index");
 const error = require("./middleware/errorHandler");
 
+app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

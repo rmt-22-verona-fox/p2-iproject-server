@@ -79,11 +79,12 @@ class userController {
         age,
         phoneNumber,
         address,
+        photoProfile: req.file.originalname,
         UserId: id,
       });
 
       res.status(200).json({
-        Profile,
+        photo: req.file,
       });
     } catch (err) {
       next(err);

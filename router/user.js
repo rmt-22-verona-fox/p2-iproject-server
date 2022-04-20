@@ -7,16 +7,14 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./images");
+    cb(null, "./public/images");
   },
   filename: function (req, file, cb) {
-    console.log(file);
     cb(null, file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
-
 user.post("/register", userController.register);
 user.post("/login", userController.login);
 user.get("/profile", authentication, userController.profile);
