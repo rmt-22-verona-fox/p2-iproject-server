@@ -55,12 +55,12 @@ class userController {
   static async profile(req, res, next) {
     try {
       const { id } = req.user;
-
       const Users = await User.findByPk(id, {
         include: [Profile],
       });
+
       if (!Users.Profile) {
-        throw { name: "Add profile first" };
+        throw { name: "Add Profile First" };
       }
       res.status(200).json(Users);
     } catch (err) {
@@ -72,7 +72,9 @@ class userController {
     try {
       const { id } = req.user;
       const { name, gender, age, phoneNumber, address } = req.body;
-
+      if (!req.file) {
+        throw { name: "Photo is required" };
+      }
       await Profile.create({
         name,
         gender,
@@ -94,19 +96,36 @@ class userController {
   static async listProfile(req, res, next) {
     try {
       let Users = "";
-      if (req.user.gender === "male") {
+
+      const Usergender = await Profile.findOne({
+        where: {
+          UserId: req.user.id,
+        },
+      });
+
+      if (Usergender.gender === "male") {
         Users = await Profile.findAll({
           where: {
             gender: "female",
           },
         });
       } else {
-        Users = await Profile.findAll({
+        Users = await Partner.findAll({
           where: {
-            gender: "male",
+            ProfileId: req.user.id,
           },
+          include: [
+            {
+              model: User,
+              include: Profile,
+            },
+          ],
+        });
+        Users = Users.map((e) => {
+          return e.User.Profile;
         });
       }
+
       if (!Users) {
         throw { name: "Data not found" };
       }
@@ -120,6 +139,15 @@ class userController {
     try {
       const { id } = req.user;
       const { ProfileId } = req.body;
+      const find = await Partner.findOne({
+        where: {
+          UserId: id,
+        },
+      });
+
+      if (find) {
+        throw { name: "You can't add more" };
+      }
       const partner = await Partner.create({
         UserId: id,
         ProfileId,
@@ -129,6 +157,77 @@ class userController {
       next(error);
     }
   }
+
+  static async listPartner(req, res, next) {
+    try {
+      const partner = await Partner.findOne({
+        where: {
+          UserId: req.user.id,
+        },
+        include: [Profile],
+      });
+      if (!partner) {
+        throw { name: "Data not found" };
+      }
+      res.status(200).json(partner);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async recievedRequest(req, res, next) {
+    try {
+      const partner = await Partner.findAll({
+        where: {
+          UserId: req.user.id,
+        },
+        include: [Profile],
+      });
+
+      res.status(200).json(partner);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async cencelRequest(req, res, next) {
+    try {
+      const { id } = req.body;
+      await Partner.destroy({
+        where: {
+          id,
+        },
+      });
+      res.status(201).json({
+        message: "Success delete",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async acceptRequest(req, res, next) {
+    try {
+      const { id } = req.body;
+      await Partner.update(
+        { status: "accepted" },
+        {
+          where: {
+            ProfileId: req.user.id,
+            UserId: id,
+          },
+        }
+      );
+      res.status(201).json({
+        message : 'accepted'
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  static async partner(req, res, next) {}
 }
 
 module.exports = userController;

@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Partner.init(
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
       ProfileId: DataTypes.INTEGER,
       UserId: DataTypes.INTEGER,
       status: DataTypes.STRING,
