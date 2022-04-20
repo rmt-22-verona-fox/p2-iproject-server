@@ -28,11 +28,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      Status: {
+      status: {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: "Pending",
-        
       },
       createdAt: {
         allowNull: false,

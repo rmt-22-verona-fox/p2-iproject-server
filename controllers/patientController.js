@@ -12,6 +12,16 @@ class patientController {
     console.log("login controller");
   }
 
+  static async read(req, res, next){
+    console.log("read controller")
+    try{
+        const response = await Doctor.findAll()
+        res.status(200).json(response)
+    }catch(err){
+        next(err)
+    }
+  }
+
   static async request(req, res, next) {
     console.log("request controller");
     console.log(req.body, "<<<<< req.body request");
@@ -43,6 +53,7 @@ class patientController {
       next(err);
     }
   }
+
 }
 
 module.exports = patientController;
