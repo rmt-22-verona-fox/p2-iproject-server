@@ -10,10 +10,21 @@ class ControllerJobs {
             Authorization: `Token ${process.env.API_KEY_FINDWORK}`,
           } 
       })
-      const data = response.data.results
+      let data = response.data.results
+      
+      let jobs = [] 
 
-
-      res.status(200).json(data)
+      if(title) {
+        data.forEach(el => {
+          if(el.role.toLowerCase().includes(title.toLowerCase()) === true) {
+            jobs.push(el)
+          }
+        });
+      } else {
+        jobs = data
+      }
+      
+      res.status(200).json(jobs)
     } catch (err) {
       if(err.response) {
         err = { name: "JOB_NOT_FOUND", statusCode: 404 }

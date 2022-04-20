@@ -27,6 +27,22 @@ class ControllerMyApplications {
       next(err)
     }
   }
+
+  static async allMyApplications(req, res, next) {
+    try {
+      const myApplications = await MyApplication.findAll({
+        where: {UserId: req.user.id},
+        attributes: {exclude: ['createdAt', 'updatedAt']},
+        order: [['createdAt', 'DESC']]
+      })
+      res.status(200).json(
+        myApplications
+      )
+    } catch (err) {
+      next(err)
+    }
+  }
+
 }
 
 module.exports = ControllerMyApplications
