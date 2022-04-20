@@ -11,8 +11,8 @@ class ControllerJobs {
           } 
       })
       const data = response.data.results
-      
-      
+
+
       res.status(200).json(data)
     } catch (err) {
       if(err.response) {
