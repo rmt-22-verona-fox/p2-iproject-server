@@ -23,10 +23,17 @@ app.use(express.json());
 
 app.use(router);
 
-// cron.schedule(" * * * * * * ", () => {
-//   //   sendBulkRandomSurah();
-//   console.log("success send email");
-// });
+cron.schedule(
+  " 00 07 * * * ",
+  () => {
+    //   sendBulkRandomSurah();
+    console.log("success send email");
+  },
+  {
+    scheduled: true,
+    timezone: "Asia/Jakarta",
+  }
+);
 app.use(error);
 
 app.listen(port, () => {

@@ -4,6 +4,8 @@ const axios = require("axios");
 const { compareHash } = require("../helpers/bcryptjs");
 const { getToken } = require("../helpers/jwt");
 const { sendRandomSurah } = require("../helpers/nodemailer");
+var dayjs = require("dayjs");
+require("dayjs/locale/id");
 
 class Controller {
   static async register(req, res, next) {
@@ -213,19 +215,21 @@ class Controller {
   static async getPrayerTime(req, res, next) {
     try {
       const { long, lat } = req.query;
-      console.log(req.query);
+
       const { data } = await axios.get(
         `https://api.pray.zone/v2/times/today.json?longitude=${long}&latitude=${lat}`
       );
-      console.log(data);
+
+      dayjs.locale("id");
       let obj = {
-        // timezone: data.results.location.timezone,
         time: data.results.datetime[0].times,
-        date: data.results.datetime[0].date.gregorian,
+        date: dayjs(data.results.datetime[0].date.gregorian).format(
+          "dddd, DD MMMM YYYY"
+        ),
       };
-      console.log(obj);
       res.status(200).json(obj);
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }
