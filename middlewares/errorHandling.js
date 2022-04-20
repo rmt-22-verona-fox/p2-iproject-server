@@ -14,7 +14,9 @@ const error = (err, req, res, next) => {
       break;
     case "User Already Bookmark This Surah":
       res.status(400).json({
-        message: "User Already Bookmark This Surah",
+        error: {
+          message: "User Already Bookmark This Surah",
+        },
       });
       break;
     case "your login is not valid":

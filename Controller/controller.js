@@ -101,7 +101,7 @@ class Controller {
           number: el.number,
           name: el.name.transliteration.id,
           translate: el.name.translation.id,
-          verseNumber: el.numberOfVerses,
+          verses: el.numberOfVerses,
           arab: el.name.short,
         };
         return obj;
@@ -213,18 +213,30 @@ class Controller {
   static async getPrayerTime(req, res, next) {
     try {
       const { long, lat } = req.query;
+      console.log(req.query);
       const { data } = await axios.get(
         `https://api.pray.zone/v2/times/today.json?longitude=${long}&latitude=${lat}`
       );
       console.log(data);
-      //   let obj = {
-      //     // timezone: data.results.location.timezone,
-      //     time: data.results.datetime[0].times,
-      //     date: data.results.datetime[0].date.gregorian,
-      //   };
-      //   console.log(obj);
-      //   res.status(200).json(obj);
+      let obj = {
+        // timezone: data.results.location.timezone,
+        time: data.results.datetime[0].times,
+        date: data.results.datetime[0].date.gregorian,
+      };
+      console.log(obj);
+      res.status(200).json(obj);
     } catch (err) {
+      next(err);
+    }
+  }
+  static async news(req, res, next) {
+    try {
+      const { data } = await axios.get(
+        `https://newsapi.org/v2/everything?q=islam&apiKey=c2cb5c46705d4e76a7d34a52907b3116`
+      );
+      res.status(200).json(data);
+    } catch (err) {
+      console.log(err);
       next(err);
     }
   }
