@@ -125,7 +125,6 @@ class userController {
           return e.User.Profile;
         });
       }
-
       if (!Users) {
         throw { name: "Data not found" };
       }
@@ -218,16 +217,61 @@ class userController {
           },
         }
       );
+      await Partner.destroy({
+        where: {
+          status: "pending",
+        },
+      });
       res.status(201).json({
-        message : 'accepted'
-      })
+        message: "accepted",
+      });
     } catch (error) {
       console.log(error);
     }
   }
 
+  static async partner(req, res, next) {
+    try {
+      let Users = "";
+      const Usergender = await Profile.findOne({
+        where: {
+          UserId: req.user.id,
+        },
+      });
+      if (Usergender.gender === "male") {
+        Users = await Partner.findOne({
+          where: {
+            status: "accepted",
+            UserId: req.user.id,
+          },
+        });
+        Users = await User.findByPk(Users.ProfileId, {
+          include: [Profile],
+        });
+        Users = [Users.Profile];
+      } else {
+        Users = await Partner.findOne({
+          where: {
+            status: "accepted",
+            ProfileId: req.user.id,
+          },
+        });
+        Users = await User.findByPk(Users.UserId, {
+          include: [Profile],
+        });
 
-  static async partner(req, res, next) {}
+        Users = [Users.Profile];
+      }
+
+      console.log(Users);
+      if (!Users) {
+        throw { name: "Data not found" };
+      }
+      res.status(200).json(Users);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = userController;

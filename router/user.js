@@ -4,7 +4,6 @@ const userController = require("../controller/user_controller");
 const authentication = require("../middleware/authentication");
 const path = require("path");
 const multer = require("multer");
-const { appendFile } = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
