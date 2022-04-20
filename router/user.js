@@ -20,9 +20,8 @@ const upload = multer({ storage: storage });
 user.post("/register", userController.register);
 user.post("/login", userController.login);
 user.get("/profile", authentication, userController.profile);
-user.post("/addprofile", authentication, userController.addprofile);
 user.post(
-  "/addprofilePhoto",
+  "/addprofile",
   authentication,
   upload.single("file"),
   userController.addprofile
