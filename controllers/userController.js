@@ -32,7 +32,51 @@ module.exports = class Controller {
       if (!isValidPassword) throw { name: "InvalidLoginData" };
 
       const token = generateToken({ id: user.id, email: user.email });
-      res.status(200).json({ access_token: token });
+      res.status(200).json({
+        access_token: token,
+        username: user.email,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async googleLogin(req, res, next) {
+    try {
+      const { token } = req.body;
+      const { OAuth2Client } = require("google-auth-library");
+      const client = new OAuth2Client(process.env.CLIENT_ID);
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
+
+      const foundUser = await User.findOne({
+        where: {
+          email: payload.email,
+        },
+      });
+
+      let accessToken;
+      let createdUser;
+      if (foundUser) {
+        accessToken = generateToken({
+          id: foundUser.id,
+          email: foundUser.email,
+        });
+      } else {
+        createdUser = await User.create({
+          email: payload.email,
+          password: "google-signin-user",
+        });
+        accessToken = generateToken({
+          id: createdUser.id,
+          email: createdUser.email,
+        });
+      }
+
+      res.status(200).json({ access_token: accessToken });
     } catch (err) {
       next(err);
     }
