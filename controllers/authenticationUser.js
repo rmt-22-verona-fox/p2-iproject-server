@@ -25,11 +25,11 @@ class AuthenticationUser {
       const { email, password } = req.body;
 
       if (!email) {
-        throw { name: 'EMAIL_CUSTOMER_REQUIRED', statusCode: 400 }
+        throw { name: 'EMAIL_USER_REQUIRED', statusCode: 400 }
       }
 
       if (!password) {
-        throw { name: 'PASSWORD_CUSTOMER_REQUIRED', statusCode: 400 }
+        throw { name: 'PASSWORD_USER_REQUIRED', statusCode: 400 }
       }
 
       const user = await User.findOne({ where: { email } });
