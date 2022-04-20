@@ -4,6 +4,7 @@ const userController = require("../controller/user_controller");
 const authentication = require("../middleware/authentication");
 const path = require("path");
 const multer = require("multer");
+const { appendFile } = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -17,14 +18,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 user.post("/register", userController.register);
 user.post("/login", userController.login);
-user.get("/profile", authentication, userController.profile);
-user.post(
-  "/addprofile",
-  authentication,
-  upload.single("file"),
-  userController.addprofile
-);
-user.get("/listprofile", authentication, userController.listProfile);
-user.post("/addpartner", authentication, userController.addPartner);
+user.use(authentication);
+user.get("/profile", userController.profile);
+user.post("/addprofile", upload.single("file"), userController.addprofile);
+user.get("/listprofile", userController.listProfile);
+user.post("/addpartner", userController.addPartner);
+user.get("/listpartner", userController.listPartner);
+user.get("/recieved", userController.recievedRequest);
+user.post("/cencel", userController.cencelRequest);
+user.patch("/accept", userController.acceptRequest);
+user.get("/partner", userController.partner);
+
 
 module.exports = user;
