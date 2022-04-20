@@ -15,24 +15,20 @@ module.exports = (err, req, res, next) => {
       });
       break;
     case "JsonWebTokenError":
+      console.log(err)
       res.status(401).json({
-        error: {
-          message: "Invalid token",
-        },
+        message: "Invalid token",
       });
       break;
     case "TokenExpiredError":
+      console.log(err)
       res.status(401).json({
-        error: {
-          message: "Invalid token",
-        },
+        message: "Invalid token",
       });
       break;
     case "Unauthorized":
       res.status(err.statusCode).json({
-        error: {
-          message: "User not registered",
-        },
+        message: "User not registered",
       });
       break;
     case "WRONG_EMAIL_PASSWORD":
@@ -42,16 +38,17 @@ module.exports = (err, req, res, next) => {
       break;
     case "Forbidden":
       res.status(err.statusCode).json({
-        error: {
-          message: "Failed authorization",
-        },
+        message: "Failed authorization",
+      });
+      break;
+    case "JOB_NOT_FOUND":
+      res.status(404).json({
+        message: "Job not found",
       });
       break;
     case "PRODUCT_NOT_FOUND":
       res.status(err.statusCode).json({
-        error: {
-          message: "Product not found",
-        },
+        message: "Product not found",
       });
       break;
     case "EMAIL_CUSTOMER_REQUIRED":
@@ -66,16 +63,12 @@ module.exports = (err, req, res, next) => {
       break;
     case "DUPLICATE_PRODUCT":
       res.status(err.statusCode).json({
-        error: {
-          message: "Product already added on wishlist"
-        }
+        message: "Product already added on wishlist"
       });
       break;
     default:
       res.status(500).json({
-        error: {
-          message: "Internal Server Error",
-        },
+        message: "Internal Server Error",
       });
   }
 };
