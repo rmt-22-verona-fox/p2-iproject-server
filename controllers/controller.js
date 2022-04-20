@@ -45,9 +45,41 @@ class Controller {
             next(error)
         }
     }
-    static async getAllData(req, res, next) {
+    static async bookingHotel(req, res, next) {
         try {
-
+            const {hotel, lat, lng, price, roomType, hotelClass, checkIn, checkOut} = req.body
+            const CustomerId = +req.user.id
+            const findTicket = await Ticket.findOne({
+                where: {
+                    CustomerId: req.user.id
+                }
+            })
+            if (findTicket) throw {name: 'ALREADY_BOOKED'}
+            const newTicket = await Ticket.create({
+                hotel,
+                lat: +lat,
+                lng: +lng,
+                price,
+                roomType,
+                hotelClass,
+                CustomerId,
+                checkIn,
+                checkOut
+            })
+            res.status(201).json(newTicket)
+        } catch (error) {
+            next(error)
+        }
+    }
+    static async getTicket(req, res, next) {
+        try {
+            const ticketData = await Ticket.findOne({
+                where: {
+                    CustomerId: req.user.id
+                },
+                include: [Customer]
+            })
+            res.status(200).json(ticketData)
         } catch (error) {
             next(error)
         }

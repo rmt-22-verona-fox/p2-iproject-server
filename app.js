@@ -12,9 +12,11 @@ app.use(express.urlencoded({extended: true}))
 app.post('/register', Controller.register)
 app.post('/login', Controller.login)
 app.use(authentication)
-app.get('/', Controller.getAllData)
+app.post('/booking', Controller.bookingHotel)
+app.get('/customers', Controller.getTicket)
 
 app.use((err, required, res, next) => {
+    console.log(err)
     if (err.name === 'SequelizeValidationError') {
         err = err.errors.map(el => el.message)
         res.status(400).json({
@@ -35,6 +37,10 @@ app.use((err, required, res, next) => {
     } else if (err.name === 'PASSWORD_IS_REQUIRED') {
         res.status(400).json({
             message: 'Password is required'
+        })
+    } else if (err.name === 'ALREADY_BOOKED') {
+        res.status(400).json({
+            message: 'You are already booked the ticket'
         })
     } else if (err.name === 'USER_NOT_FOUND') {
         res.status(401).json({

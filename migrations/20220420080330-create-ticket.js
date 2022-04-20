@@ -13,11 +13,11 @@ module.exports = {
         allowNull: false,
       },
       lat: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
         allowNull: false,
       },
       lng: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
         allowNull: false,
       },
       price: {
@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      class: {
+      hotelClass: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
