@@ -15,27 +15,12 @@ module.exports = {
       'Categories',
       [
         {
-          name: 'Kain Jacquard',
+          name: 'Kain Bahan Sprei',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: 'Kain Sutra',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: 'Kain Poly TC',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: 'Kain Katun Panca',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: 'Kain Katun Catra',
+          name: 'Kain Bahan Lain',
           createdAt: new Date(),
           updatedAt: new Date(),
         },

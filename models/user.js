@@ -1,5 +1,4 @@
 'use strict';
-const { user } = require('pg/lib/defaults');
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -32,9 +31,20 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        allowNull: { args: false, msg: 'Email cannot be null' },
+        validate: {
+          isEmail: { args: true, msg: 'Email must be a valid email address' },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: { args: false, msg: 'Password cannot be null' },
+      },
       username: DataTypes.STRING,
+      role: DataTypes.STRING,
+      seller: DataTypes.BOOLEAN,
     },
     {
       sequelize,

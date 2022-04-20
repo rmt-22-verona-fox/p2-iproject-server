@@ -33,8 +33,14 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      name: DataTypes.STRING,
-      description: DataTypes.TEXT,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: { args: false, msg: 'Name is required' },
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: { args: false, msg: 'Description is required' },
+      },
       quantity: DataTypes.INTEGER,
       price: DataTypes.INTEGER,
       categoryId: DataTypes.INTEGER,
