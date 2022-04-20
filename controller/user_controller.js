@@ -226,7 +226,7 @@ class userController {
         message: "accepted",
       });
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 
@@ -263,7 +263,6 @@ class userController {
         Users = [Users.Profile];
       }
 
-      console.log(Users);
       if (!Users) {
         throw { name: "Data not found" };
       }
