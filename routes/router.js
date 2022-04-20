@@ -10,6 +10,7 @@ router.get("/prayerTime", Controller.getPrayerTime);
 router.post("/bookmarks/:id", authentication, Controller.addBookmark);
 router.delete("/bookmarks/:id", authentication, Controller.deleteBookmarks);
 router.get("/surah", Controller.getSurah);
+router.get("/news", Controller.news);
 router.get("/randomSurah", Controller.randomSurah);
 router.get("/surah/:id", Controller.detailSurah);
 
