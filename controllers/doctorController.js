@@ -1,5 +1,6 @@
 const { toVerify } = require("../helpers/bcrypt");
-const { Doctor } = require("../models");
+const { toToken } = require("../helpers/jwt");
+const { Doctor, DoctorPatient, Patient } = require("../models");
 
 class doctorController {
   static async login(req, res, next) {
@@ -10,16 +11,16 @@ class doctorController {
           email: req.body.email,
         },
       });
-
       if (!response) {
         throw { name: "D_NOT_FOUND" };
       }
-
       const isValid = toVerify(req.body.password, response.password);
 
       if(!isValid){
           throw {name: "D_NOT_FOUND"}
       }
+
+      const token = toToken()
       
     } catch (err) {
       next(err);
@@ -29,8 +30,20 @@ class doctorController {
   static async getAllPatients(req, res, next) {
     console.log("get all patients controllers");
     try {
+        
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async changeStat(req, res, next) {
+    console.log("get all patients controllers");
+    
+    try {
     } catch (err) {
       next(err);
     }
   }
 }
+
+module.exports = doctorController

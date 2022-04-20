@@ -1,34 +1,15 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
-const nodemailer = require('nodemailer')
-const router = require('./router')
+const patientRouter = require('./routers/patientRouter')
+const doctorRouter = require('./routers/doctorRouter')
+var cors = require('cors')
+app.use(cors())
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
-let transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: "hcms.edgar.test@gmail.com",
-        pass: "$hcmsadmin4"
-    }
-})
-
-let mailOptions = {
-    from: "hcms.edgar.test@gmail.com",
-    to: "edgar.dimas.ir@gmail.com",
-    subject: "Testing",
-    text:"first email send from nodejs",
-    
-}
-
-transporter.sendMail(mailOptions, (err, success) => {
-    if(err){
-        console.log(err)
-    } else {
-        console.log("Email sent successfully")
-    }
-})
-
-app.use(router)
+app.use('/patient', patientRouter)
+app.use('/doctor', doctorRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

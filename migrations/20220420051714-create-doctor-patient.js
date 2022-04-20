@@ -28,6 +28,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      Status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "Pending",
+        
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,0 +1,18 @@
+[
+    {
+        "name":"Dr. Edgar",
+        "email": "edgar.dimas.ir@gmail.com",
+        "password": "edgardimash",
+        "phoneNumber": "0111122223",
+        "speciality": "General Practice",
+        "imageUrl": "https://st.depositphotos.com/1771835/1477/i/950/depositphotos_14779771-stock-photo-portrait-of-confident-young-doctor.jpg"
+    },
+    {
+        "name":"Dr. Erika",
+        "email": "erika@gmail.com",
+        "password": "erika",
+        "phoneNumber": "01112221101",
+        "speciality": "General Practice",
+        "imageUrl": "https://st.depositphotos.com/1771835/1477/i/950/depositphotos_14779771-stock-photo-portrait-of-confident-young-doctor.jpg"
+    }
+]
