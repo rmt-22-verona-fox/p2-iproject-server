@@ -6,6 +6,6 @@ const ControllerMyApplications = require("../controllers/controllerMyApplication
 router.post("/", ControllerMyApplications.addMyApplications);
 router.get('/', ControllerMyApplications.allMyApplications)
 router.delete('/:id', ControllerMyApplications.deleteMyApplications)
-
+router.patch('/:id', ControllerMyApplications.updateStatusMyApplications)
 
 module.exports = router;

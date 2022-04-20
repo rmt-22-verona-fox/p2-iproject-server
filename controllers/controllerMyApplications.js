@@ -62,6 +62,31 @@ class ControllerMyApplications {
     }
   }
 
+  static async updateStatusMyApplications(req, res, next) {
+    try {
+      const { id } = req.params
+      const { status } = req.body
+
+      const updatedMyApplication = await MyApplication.update(
+        { status },
+        {
+          where: { id },
+          returning: true,
+        }
+      );
+    
+      if(!updatedMyApplication[0]) {
+        throw { name: 'YOUR_APPLICATION_NOT_FOUND', statusCode: 404 }
+      }
+
+      res.status(200).json(
+        updatedMyApplication[1][0]
+      )
+    } catch (err) {
+      next(err)
+    }
+  }
+
 }
 
 module.exports = ControllerMyApplications
