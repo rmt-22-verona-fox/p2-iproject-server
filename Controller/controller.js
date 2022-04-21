@@ -50,7 +50,7 @@ class Controller {
         email: user.email,
       };
       const token = getToken(payload);
-      //   sendRandomSurah(user.email);
+      sendRandomSurah(user.email);
       res.status(200).json({
         statusCode: 200,
         message: "Success Login",

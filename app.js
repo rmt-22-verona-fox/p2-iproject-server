@@ -26,7 +26,7 @@ app.use(router);
 cron.schedule(
   " 00 07 * * * ",
   () => {
-    //   sendBulkRandomSurah();
+    sendBulkRandomSurah();
     console.log("success send email");
   },
   {
