@@ -66,12 +66,10 @@ module.exports = class Controller {
         PokemonId: firstPokemonId,
       });
 
-      res
-        .status(200)
-        .json({
-          message: "Trade done successfully",
-          data: [newFirstUserPokemon, newSecondUserPokemon],
-        });
+      res.status(200).json({
+        message: "Trade done successfully",
+        data: [newFirstUserPokemon, newSecondUserPokemon],
+      });
     } catch (err) {
       next(err);
     }

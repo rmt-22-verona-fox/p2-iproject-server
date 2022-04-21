@@ -46,7 +46,6 @@ io.on("connection", (socket) => {
     if (payload && payload.message) {
       chats.push(payload);
     }
-    console.log(chats);
 
     io.emit("receivedMessageFromServer", chats);
   });
@@ -59,16 +58,6 @@ io.on("connection", (socket) => {
     payload.pokemonName = data.name;
 
     chats.push(payload);
-    console.log(chats);
-
-    // for (let i = chats.length - 1; i >= 0; i--) {
-    //   const lastUser = chats[chats.length - 1].user;
-    //   if (chats[i].user !== lastUser && chats[i].PokemonId) {
-    //     chats.push({
-    //       firstUser: { } })
-    //     break;
-    //   }
-    // }
 
     io.emit("receivedMessageFromServer", chats);
   });
