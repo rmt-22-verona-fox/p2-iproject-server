@@ -85,4 +85,4 @@ httpServer.listen(process.env.PORT, () => {
   console.log("listening on *:3001");
 });
 
-module.exports = app;
+// module.exports = app;
