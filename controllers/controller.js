@@ -114,10 +114,12 @@ class Controller {
     }
     static async payment(req, res, next) {
         try {
+            let price = req.body.price * req.body.hotelClass
+            if (!price) price = 100000
             let parameter = {
                 transaction_details: {
                     order_id: Math.floor(Math.random() * 100000),
-                    gross_amount: req.body.price * req.body.hotelClass
+                    gross_amount: price
                 }, credit_card:{
                     secure : true
                 }
