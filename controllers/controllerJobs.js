@@ -7,7 +7,7 @@ class ControllerJobs {
       const response = await axios.get(`https://findwork.dev/api/jobs/?search=${title}&source=${source}&location=&remote=${remote}&company_num_employees=&employment_type=&order_by=`, {
         headers: 
           { 
-            Authorization: `Token ${process.env.API_KEY_FINDWORK}`,
+            Authorization: process.env.API_KEY_FINDWORK,
           } 
       })
       let data = response.data.results.slice(0, 9)
