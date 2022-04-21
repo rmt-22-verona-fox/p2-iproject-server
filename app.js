@@ -13,9 +13,9 @@ const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "https://pokenomo-iproject.web.app",
+    origin: "*",
     methods: ["GET", "POST", "OPTIONS"],
-    credentials: true,
+    // credentials: true,
   },
   allowRequest: (req, callback) => {
     const noOriginHeader = req.headers.origin === undefined;
