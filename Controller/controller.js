@@ -120,6 +120,9 @@ class Controller {
       const { data } = await axios.get(
         `https://api.quran.sutanlab.id/surah/${id}`
       );
+      if (data.code === 404) {
+        throw { name: "Surah is not found" };
+      }
       const bookmark = await Bookmark.findOne({
         where: {
           UserId: req.user.id,
@@ -170,7 +173,10 @@ class Controller {
       const { data } = await axios.get(
         `https://api.quran.sutanlab.id/surah/${id}`
       );
-      console.log(data);
+
+      if (data.code === 404) {
+        throw { name: "Surah is not found" };
+      }
       const verses = data.data.verses.map((el) => {
         let obj = {
           ayat: el.number.inSurah,
@@ -181,6 +187,7 @@ class Controller {
         };
         return obj;
       });
+
       res.status(200).json({
         name: data.data.name.transliteration.id,
         number: data.data.number,
@@ -190,7 +197,7 @@ class Controller {
         verses,
       });
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   }
   static async randomSurah(req, res, next) {

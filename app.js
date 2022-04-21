@@ -24,10 +24,9 @@ app.use(express.json());
 app.use(router);
 
 cron.schedule(
-  " 00 07 * * * ",
+  " 51 08 * * * ",
   () => {
     sendBulkRandomSurah();
-    console.log("success send email");
   },
   {
     scheduled: true,
