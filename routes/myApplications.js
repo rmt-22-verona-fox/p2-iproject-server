@@ -14,6 +14,7 @@ router.post(
   limitTotalApplication,
   ControllerMyApplications.addMyApplication
 );
+router.post('/payment', ControllerMyApplications.paymentMyApplication)
 router.get("/", ControllerMyApplications.allMyApplications);
 router.delete(
   "/:id",

@@ -6,6 +6,7 @@ List of Available Endpoints:
 - `GET /jobs`
 - `GET /myapplications`
 - `POST /myapplications`
+- `POST /myapplications/payment`
 - `DELETE /myapplications/:id`
 - `PATCH /myapplications/:id`
 
@@ -347,6 +348,48 @@ _409 - Clashed_
     ```json
     {
       "message": "You already applied 3 applications, please finish them before applied another application"
+    }
+    ```
+_500 - Internal Server Error_
+- Body
+    ```json
+    {
+      "message": "Internal Server Error"
+    }
+    ```
+
+
+## POST /myapplications/payment
+
+### Description 
+- Ask user to do payment before applied application
+
+### Request
+- Headers
+    ```json
+    {
+      "access_token": String
+    }
+
+### Response
+_200 - OK_
+- Body 
+    ```json
+    {
+      "token": String,
+    },
+    ```
+_401 - Unauthorized_
+- Body for wrong token
+    ```json
+    {
+      "message": "Invalid token, please login again"
+    }
+    ```
+- Body for deleted user
+    ```json
+    {
+      "message": "User not found"
     }
     ```
 _500 - Internal Server Error_
