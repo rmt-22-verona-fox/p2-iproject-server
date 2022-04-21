@@ -30,6 +30,8 @@ const error = (err, req, res, next) => {
     case "Already have a profile":
     case "Photo is required":
     case "You can't add more":
+    case "Wrong Email":
+    case "Password not match":
       error = err.name;
       code = 404;
       break;
