@@ -69,30 +69,28 @@ class userController {
       }
 
       // create reusable transporter object using the default SMTP transport
-      let transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false, // true for 465, false for other ports
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
         auth: {
-          user: "frieda.marks40@ethereal.email", // generated ethereal user
-          pass: "pxYTugBCz8xr4RVuEh", // generated ethereal password
+          user: "fitrahdummy123@gmail.com",
+          pass: "fitrah6969",
         },
       });
 
       // send mail with defined transport object
-      let info = await transporter.sendMail({
-        from: '"Dating App" <foo@example.com>', // sender address
-        to: `${email}`, // list of receivers
-        subject: "Reset password", // Subject line
+      let mailOptions = {
+        from: "fitrahdummy123@gmail.com",
+        to: email,
+        subject: "Reset your password!",
         html: `<p>Click <a href="http://localhost:8080/reset/${Users.id}">here</a> to reset your password</p>`,
+      };
+      transporter.sendMail(mailOptions, function (err, info) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(`Email sent: ${info.response}`);
+        }
       });
-
-      console.log("Message sent: %s", info.messageId);
-      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-      // Preview only available when sending through an Ethereal account
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-      // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
     } catch (error) {
       next(error);
     }
@@ -112,7 +110,7 @@ class userController {
       }
 
       await User.update({ password: encrypt(password1) }, { where: { id } });
-     
+
       res.status(200).json({
         message: "Success change password",
       });
@@ -340,6 +338,7 @@ class userController {
       next(error);
     }
   }
+  
 }
 
 module.exports = userController;
