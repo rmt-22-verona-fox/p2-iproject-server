@@ -11,6 +11,11 @@ const axios = require("axios");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const httpServer = createServer(app);
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
+
 const io = new Server(httpServer, {
   cors: {
     origin: "*",
@@ -22,9 +27,6 @@ const io = new Server(httpServer, {
     callback(null, noOriginHeader);
   },
 });
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 let users = [];
 let chats = [];
