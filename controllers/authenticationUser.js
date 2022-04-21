@@ -1,22 +1,26 @@
 const { User } = require("../models");
-const { comparePassword } = require('../helpers/helperBcrypt')
-const { generateToken } = require('../helpers/helperJwt')
+const { comparePassword } = require("../helpers/helperBcrypt");
+const { generateToken } = require("../helpers/helperJwt");
 
 class AuthenticationUser {
   static async userRegister(req, res, next) {
     try {
       const { email, password, firstName, lastName, location } = req.body;
       const newUser = await User.create({
-        email, password, firstName, lastName, location
+        email,
+        password,
+        firstName,
+        lastName,
+        location,
       });
 
       res.status(201).json({
         id: newUser.id,
         email: newUser.email,
-        fullName: `${newUser.firstName} ${newUser.lastName}`
+        fullName: `${newUser.firstName} ${newUser.lastName}`,
       });
     } catch (err) {
-      console.log(err)
+      console.log(err);
       next(err);
     }
   }
@@ -26,11 +30,11 @@ class AuthenticationUser {
       const { email, password } = req.body;
 
       if (!email) {
-        throw { name: 'EMAIL_USER_REQUIRED', statusCode: 400 }
+        throw { name: "EMAIL_USER_REQUIRED", statusCode: 400 };
       }
 
       if (!password) {
-        throw { name: 'PASSWORD_USER_REQUIRED', statusCode: 400 }
+        throw { name: "PASSWORD_USER_REQUIRED", statusCode: 400 };
       }
 
       const user = await User.findOne({ where: { email } });

@@ -1,69 +1,69 @@
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('MyApplications', {
+    await queryInterface.createTable("MyApplications", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       UserId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
-          key: 'id'
+          model: "Users",
+          key: "id",
         },
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
+        onDelete: "cascade",
+        onUpdate: "cascade",
       },
       jobId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       title: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       remote: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
       },
       companyName: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       description: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: false,
       },
       source: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       createdDate: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       jobUrl: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('MyApplications');
-  }
+    await queryInterface.dropTable("MyApplications");
+  },
 };
