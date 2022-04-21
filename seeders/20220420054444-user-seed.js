@@ -23,7 +23,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
           role: 'admin',
-          seller: true,
+          isSeller: true,
         },
         {
           email: 'ucok@mail.com',
@@ -32,7 +32,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
           role: 'member',
-          seller: true,
+          isSeller: true,
         },
         {
           email: 'jamal@mail.com',
@@ -41,7 +41,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
           role: 'member',
-          seller: false,
+          isSeller: false,
         },
       ],
       {}
