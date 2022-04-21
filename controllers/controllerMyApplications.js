@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const midtransClient = require('midtrans-client');
 
 const { MyApplication } = require("../models");
 
@@ -113,6 +114,34 @@ class ControllerMyApplications {
       res.status(200).json(updatedMyApplication[1][0]);
     } catch (err) {
       next(err);
+    }
+  }
+
+  static async paymentMyApplication(req, res, next) {
+    try {
+      let snap = new midtransClient.Snap({
+        isProduction : false,
+        serverKey : process.env.S_KEY_MIDTRANS,
+        clientKey : process.env.C_KEY_MIDTRANS
+      });
+
+      let parameter = {
+        transaction_details: {
+          order_id: `${Math.floor(Math.random() * 137731137731137)}`,
+          gross_amount: 10000
+        }
+      }
+
+      const transaction = await snap.createTransaction(parameter)
+
+      let transactionToken = transaction.token
+      let transactionRedirectUrl  = transaction.redirect_url
+
+      res.status(200).json({
+        token: transactionToken
+      })
+    } catch (err) {
+      next(err)
     }
   }
 }
