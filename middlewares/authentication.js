@@ -7,9 +7,9 @@ const authentication = async (req, res, next) => {
 
     const payload = tokenToPayload(access_token);
 
-    const customerFound = await Customer.findByPk(payload.id);
+    const customerFound = await Customer.findByPk(payload.CustomerId);
 
-    if (!userFound) {
+    if (!customerFound) {
       throw { statusCode: 401 };
     } else {
       req.user = {

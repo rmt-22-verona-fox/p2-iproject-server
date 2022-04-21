@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       CustomerId: DataTypes.INTEGER,
       orderedHands: DataTypes.INTEGER,
+      status: {
+        type: DataTypes.STRING,
+        defaultValue: "unfinished",
+      },
     },
     {
       sequelize,

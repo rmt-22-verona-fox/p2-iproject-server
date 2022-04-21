@@ -2,6 +2,14 @@ const { Customer, Event, History, Order } = require("../models");
 const { comparePassword } = require("../helpers/bcrypt");
 const { payloadToToken } = require("../helpers/jwt");
 
+const midtransClient = require("midtrans-client");
+// Create Snap API instance
+let snap = new midtransClient.Snap({
+  isProduction: false,
+  serverKey: "SB-Mid-server-_aXPmdU9k32_9J1tDPCDj0W_",
+  clientKey: "SB-Mid-client-rJQkrPkvx8zujvzn",
+});
+
 class customerController {
   static async register(req, res, next) {
     try {
@@ -58,6 +66,69 @@ class customerController {
         CustomerId: customer.id,
       });
     } catch (error) {
+      next(error);
+    }
+  }
+
+  static async beforeTransaction(req, res, next) {
+    try {
+      const { CustomerId, orderedHands } = req.body;
+
+      const createOrder = await Order.create({
+        CustomerId,
+        orderedHands,
+      });
+
+      let order = await Order.findAll();
+      let order_id = order.length;
+      let gross_amount = orderedHands * 100000;
+
+      let parameter = {
+        transaction_details: {
+          order_id: `ngeflick-development-${order_id}`,
+          gross_amount: gross_amount,
+        },
+      };
+
+      const transaction = await snap.createTransaction(parameter);
+
+      let transactionToken = transaction.token;
+
+      // console.log("transactionToken:", transactionToken);
+
+      let transactionRedirectUrl = transaction.redirect_url;
+
+      // console.log("transactionRedirectUrl:", transactionRedirectUrl);
+
+      res.status(200).json({
+        token: transactionToken,
+        redirect_url: transactionRedirectUrl,
+      });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  static async afterTransaction(req, res, next) {
+    try {
+      const { CustomerId, orderedHands } = req.body;
+
+      const customerFound = await Customer.findByPk(CustomerId);
+      const increaseHands = await customerFound.increment("hands", {
+        by: orderedHands,
+      });
+      const orderStatus = await Order.update(
+        { status: "finished" },
+        { where: { CustomerId } }
+      );
+
+      res.status(200).json({
+        statusCode: 200,
+        message: "Transaction success",
+      });
+    } catch (error) {
+      console.log(error);
       next(error);
     }
   }
