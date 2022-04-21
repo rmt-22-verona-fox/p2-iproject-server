@@ -17,6 +17,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 user.post("/register", userController.register);
 user.post("/login", userController.login);
+user.post("/forgorpassword",userController.passwordForgot);
+user.patch("/reserpassword", userController.resetForgot);
+
+
 user.use(authentication);
 user.get("/profile", userController.profile);
 user.post("/addprofile", upload.single("file"), userController.addprofile);

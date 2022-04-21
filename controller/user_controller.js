@@ -1,6 +1,7 @@
 const { User, Profile, Partner } = require("../models");
 const { tokenCreate } = require("../helper/jwt");
-const { decryption } = require("../helper/encryption");
+const { decryption, encrypt } = require("../helper/encryption");
+const nodemailer = require("nodemailer");
 
 class userController {
   static async register(req, res, next) {
@@ -46,6 +47,74 @@ class userController {
 
       res.status(200).json({
         access_token: token,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async passwordForgot(req, res, next) {
+    try {
+      const { email } = req.body;
+      if (!email) {
+        throw { name: "Email is required" };
+      }
+      const Users = await User.findOne({
+        where: {
+          email,
+        },
+      });
+      if (!Users) {
+        throw { name: "Wrong Email" };
+      }
+
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: "frieda.marks40@ethereal.email", // generated ethereal user
+          pass: "pxYTugBCz8xr4RVuEh", // generated ethereal password
+        },
+      });
+
+      // send mail with defined transport object
+      let info = await transporter.sendMail({
+        from: '"Dating App" <foo@example.com>', // sender address
+        to: `${email}`, // list of receivers
+        subject: "Reset password", // Subject line
+        html: `<p>Click <a href="http://localhost:8080/reset/${Users.id}">here</a> to reset your password</p>`,
+      });
+
+      console.log("Message sent: %s", info.messageId);
+      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+      // Preview only available when sending through an Ethereal account
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async resetForgot(req, res, next) {
+    try {
+      console.log("asdf");
+      console.log(req.body);
+      const { password1, password2, id } = req.body;
+      if (!password1 || !password2) {
+        throw { name: "Password is required" };
+      }
+      if (password1 !== password2) {
+        console.log("asas");
+        throw { name: "Password not match" };
+      }
+
+      await User.update({ password: encrypt(password1) }, { where: { id } });
+     
+      res.status(200).json({
+        message: "Success change password",
       });
     } catch (err) {
       next(err);
