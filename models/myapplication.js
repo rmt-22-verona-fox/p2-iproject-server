@@ -100,7 +100,19 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+    jobUrl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Link for job is required'
+        },
+        notEmpty: {
+          msg: 'Link for job is required'
+        }
+      }
+    },
   }, {
     hooks: {
       beforeCreate(instance, options) {

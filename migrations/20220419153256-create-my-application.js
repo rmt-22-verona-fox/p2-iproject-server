@@ -49,6 +49,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      jobUrl: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

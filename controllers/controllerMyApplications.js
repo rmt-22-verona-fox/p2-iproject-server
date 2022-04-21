@@ -1,9 +1,11 @@
+const nodemailer = require('nodemailer')
+
 const { MyApplication } = require('../models')
 
 class ControllerMyApplications {
   static async addMyApplication(req, res, next) {
     try {
-      const { jobId, title, remote, companyName, description, source , createdDate } = req.body
+      const { jobId, title, remote, companyName, description, source , createdDate, jobUrl } = req.body
       const newMyApplication = await MyApplication.create({
         UserId: req.user.id,
         jobId,
@@ -12,7 +14,8 @@ class ControllerMyApplications {
         companyName,
         description,
         source,
-        createdDate
+        createdDate,
+        jobUrl
       })
 
       const myApplication = await MyApplication.findOne({
@@ -78,6 +81,23 @@ class ControllerMyApplications {
       if(!updatedMyApplication[0]) {
         throw { name: 'YOUR_APPLICATION_NOT_FOUND', statusCode: 404 }
       }
+
+      let mailTransporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.DUMAIL,
+          pass: process.env.DUMPAS
+        },
+      })
+
+      let details = {
+        from: process.env.DUMAIL,
+        to: req.user.email,
+        subject: 'Link for Apply Your Application',
+        text: `Here you can find link to apply your application: ${updatedMyApplication[1][0].jobUrl}`
+      }
+
+      await mailTransporter.sendMail(details)
 
       res.status(200).json(
         updatedMyApplication[1][0]
