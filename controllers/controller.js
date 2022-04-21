@@ -2,6 +2,7 @@ const {Customer, Ticket} = require('../models')
 const { verifyPassword } = require("../helpers/bcrypt")
 const { tokenGenerator } = require("../helpers/jwt")
 const nodemailer = require('nodemailer')
+const snap = require('../helpers/midtrans')
 
 class Controller {
     static async register(req, res, next) {
@@ -56,7 +57,6 @@ class Controller {
                     CustomerId: req.user.id
                 }
             })
-            // if (findTicket) throw {name: 'ALREADY_BOOKED'}
             const newTicket = await Ticket.create({
                 hotel,
                 lat: +lat,
@@ -108,6 +108,25 @@ class Controller {
                 include: [Customer]
             })
             res.status(200).json(ticketData)
+        } catch (error) {
+            next(error)
+        }
+    }
+    static async payment(req, res, next) {
+        try {
+            let parameter = {
+                transaction_details: {
+                    order_id: Math.floor(Math.random() * 100000),
+                    gross_amount: req.body.price * req.body.hotelClass
+                }, credit_card:{
+                    secure : true
+                }
+            };
+
+            const transaction = await snap.createTransaction(parameter)
+            res.status(201).json({
+                token: transaction.token
+            })
         } catch (error) {
             next(error)
         }

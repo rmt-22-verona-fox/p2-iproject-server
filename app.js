@@ -17,8 +17,7 @@ app.post('/register', Controller.register)
 app.post('/login', Controller.login)
 app.use(authentication)
 app.post('/booking', Controller.bookingHotel)
-app.get('/customers', Controller.getTicket)
-
+app.post('/payment', Controller.payment)
 app.use(errorHandlers)
 
 app.listen(port, () => {
