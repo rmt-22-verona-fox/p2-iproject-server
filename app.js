@@ -20,14 +20,7 @@ app.use(cors());
 const io = new Server(httpServer, {
   cors: {
     origin: "*",
-    // methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
-    // preflightContinue: false,
-    // optionsSuccessStatus: 204,
   },
-  // allowRequest: (req, callback) => {
-  //   const noOriginHeader = req.headers.origin === undefined;
-  //   callback(null, noOriginHeader);
-  // },
 });
 
 let users = [];
@@ -86,7 +79,5 @@ app.use(routes);
 app.use(errorHandler);
 
 httpServer.listen(port, () => {
-  console.log("listening on *:3001");
+  console.log("app listening");
 });
-
-// module.exports = app;
