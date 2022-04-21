@@ -19,15 +19,15 @@ app.use(cors());
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "https://pokenomo-iproject.web.app",
-    methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
+    origin: "*",
+    // methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
+    // preflightContinue: false,
+    // optionsSuccessStatus: 204,
   },
-  allowRequest: (req, callback) => {
-    const noOriginHeader = req.headers.origin === undefined;
-    callback(null, noOriginHeader);
-  },
+  // allowRequest: (req, callback) => {
+  //   const noOriginHeader = req.headers.origin === undefined;
+  //   callback(null, noOriginHeader);
+  // },
 });
 
 let users = [];
