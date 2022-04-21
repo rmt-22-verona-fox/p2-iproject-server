@@ -1,4 +1,5 @@
 const { Booking } = require("../models");
+const nodemailer = require("nodemailer");
 
 class Controller {
   static async bookingCreate(req, res, next) {
@@ -37,6 +38,29 @@ class Controller {
         totalPayment: Math.round(totalPayment),
         discount,
         destinationId,
+      });
+
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "aliansyah720@gmail.com",
+          pass: "beifong2pop",
+        },
+      });
+
+      const mailOptions = {
+        from: '"Nomads Official" <sekertariat-negara@gmail.com>',
+        to: email,
+        subject: "Booking Comfirm",
+        text: `This your book number : ${createBooking.bookingNumber}`,
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
       });
 
       res.status(201).json({

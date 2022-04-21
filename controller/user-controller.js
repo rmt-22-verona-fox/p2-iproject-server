@@ -22,8 +22,6 @@ class Controller {
 
       const token = createToken(payload);
 
-      console.log(findUser);
-
       res.status(200).json({
         access_token: token,
         firstName: findUser.firstName,
