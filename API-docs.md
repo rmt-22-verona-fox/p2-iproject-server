@@ -391,3 +391,19 @@ _To get random surah_
     "indonesia": String
 }
 ```
+
+## GLOBAL ERROR
+
+## Response
+
+**500 Internal Server Error**
+
+```json
+{
+  "statusCode": 500,
+  "error": {
+    "message": "Internal Server Error",
+    "description": String (description of an error message)
+  }
+}
+```
