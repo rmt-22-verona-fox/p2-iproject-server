@@ -11,6 +11,7 @@ const axios = require("axios");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const httpServer = createServer(app);
+const port = process.env.PORT;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -18,7 +19,7 @@ app.use(cors());
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: `https://pokenomo.herokuapp.com:${port}`,
     methods: ["GET", "POST", "OPTIONS"],
     // credentials: true,
   },
@@ -83,7 +84,9 @@ app.use(routes);
 
 app.use(errorHandler);
 
-httpServer.listen(process.env.PORT, () => {
+
+
+httpServer.listen(port, () => {
   console.log("listening on *:3001");
 });
 
