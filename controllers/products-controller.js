@@ -34,7 +34,7 @@ class Controller {
 
     static async sneakersDetail(req, res, next) {
         try {
-            const { id } = req.params.id
+            const id = req.params.id
             let options = {
                 method: 'GET',
                 url: `https://the-sneaker-database.p.rapidapi.com/sneakers/${id}`,
@@ -46,9 +46,14 @@ class Controller {
 
             // const { data } = await getSneakers(options)
             // res.status(200).json(data.results)
-
             const data = JSON.parse(fs.readFileSync('./db/products.json'))
-            res.status(200).json(data)
+            let dataDetail = ''
+            data.forEach(el => {
+                if (el.id === id) {
+                    dataDetail = el
+                }
+            })
+            res.status(200).json(dataDetail)
         } catch (err) {
             next(err)
         }

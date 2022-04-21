@@ -19,10 +19,10 @@ class Controller {
         try {
             const id = req.user.id
             const { itemName, price, size, quantity } = req.body
-                // console.log(itemName, price, size, quantity, id)
+            console.log(itemName, price, size, quantity, id)
             const newInvoice = await Invoice.create({
                 itemName: itemName,
-                price: price,
+                price: price * quantity,
                 size: +size,
                 quantity: quantity,
                 UserId: id
@@ -30,7 +30,6 @@ class Controller {
 
             res.status(201).json(newInvoice)
         } catch (err) {
-            console.log(err)
             next(err)
         }
     }
