@@ -30,7 +30,6 @@ class customerController {
         CustomerId: customer.id,
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -105,7 +104,6 @@ class customerController {
         redirect_url: transactionRedirectUrl,
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -128,7 +126,7 @@ class customerController {
         message: "Transaction success",
       });
     } catch (error) {
-      console.log(error);
+      c;
       next(error);
     }
   }
