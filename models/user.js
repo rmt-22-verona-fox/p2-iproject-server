@@ -3,7 +3,16 @@ const { Model } = require("sequelize");
 const { hashPassword } = require("../helpers");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate(models) {}
+    static associate(models) {
+      this.belongsToMany(models.Booking, {
+        through: "userBookings",
+        foreignKey: "userId",
+      });
+      this.belongsToMany(models.Destination, {
+        through: "Wishlist",
+        foreignKey: "userId",
+      });
+    }
   }
   User.init(
     {
