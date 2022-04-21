@@ -1,11 +1,12 @@
-const express = require('express')
+const express = require('express');
 const patientRouter = express.Router()
 const PatientController = require('../controllers/patientController');
-
+const authentication = require('../middlewares/authentication');
 // define the home page route
 patientRouter.post('/login', PatientController.login )
 patientRouter.post('/register', PatientController.register)
-patientRouter.post('/request', PatientController.request)
+patientRouter.use(authentication)
 patientRouter.get('/read', PatientController.read)
+patientRouter.post('/request', PatientController.request)
 
 module.exports = patientRouter

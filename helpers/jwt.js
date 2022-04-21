@@ -1,23 +1,18 @@
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
-const secret_key = process.env.SECRET;
-function toToken(user_id) {
-  const decode = jwt.sign(
-    {
-      id: user_id,
-    },
-    secret_key,
-    { expiresIn: "1h" }
-  );
-  return decode
+require('dotenv').config()
+const jwt = require('jsonwebtoken');
+const secretKey = process.env.SECRET;
+// console.log('jwt jalan <<<<<<<<<<<<<<<')
+const generateToken = (payload) => {
+    return jwt.sign(payload, secretKey, {
+        expiresIn: "2h"
+    });
 }
 
-function verifyToken(token) {
-  const decoded = jwt.verify(token, "shhhhh");
-  return decoded
-}
+const convertToken = (token) => {
+    return jwt.verify(token, secretKey);
+};
 
 module.exports = {
-    toToken,
-    verifyToken
+    generateToken,
+    convertToken
 }

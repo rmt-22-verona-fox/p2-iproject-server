@@ -1,15 +1,15 @@
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs')
 
-function toHash(password){
-    const hash = bcrypt.hashSync(password, 10);
-    return hash
-}
+const hashed = (password) => {
+    return bcryptjs.hashSync(password, 10)
+};
 
-function toVerify(inputPas, databasePas){
-    bcrypt.compareSync(inputPas, databasePas)
+const compareHash = (inputedPassword, databaseHash) => {
+    return bcryptjs.compareSync(inputedPassword, databaseHash)
 }
 
 module.exports = {
-    toHash,
-    toVerify,
+    hashed,
+    compareHash
+
 }
