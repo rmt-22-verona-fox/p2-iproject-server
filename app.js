@@ -19,9 +19,10 @@ app.use(cors());
 
 const io = new Server(httpServer, {
   cors: {
-    origin: `https://pokenomo.herokuapp.com:${port}`,
-    methods: ["GET", "POST", "OPTIONS"],
-    // credentials: true,
+    origin: "https://pokenomo-iproject.web.app",
+    methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   },
   allowRequest: (req, callback) => {
     const noOriginHeader = req.headers.origin === undefined;
@@ -83,8 +84,6 @@ io.on("connection", (socket) => {
 app.use(routes);
 
 app.use(errorHandler);
-
-
 
 httpServer.listen(port, () => {
   console.log("listening on *:3001");
