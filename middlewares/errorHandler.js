@@ -2,14 +2,12 @@ module.exports = (err, req, res, next) => {
   switch (err.name) {
     case "SequelizeUniqueConstraintError":
       [errorMessage] = err.errors.map((el) => el.message);
-      console.log(errorMessage, '>>>>>>>>')
       res.status(400).json({
         message: errorMessage,
       });
       break;
     case "SequelizeValidationError":
       [errorMessage] = err.errors.map((el) => el.message);
-      console.log(errorMessage, '>>>>>>>>')
       res.status(400).json({
         message: errorMessage,
       });
@@ -17,18 +15,18 @@ module.exports = (err, req, res, next) => {
     case "JsonWebTokenError":
       console.log(err)
       res.status(401).json({
-        message: "Invalid token",
+        message: "Invalid token, please login again",
       });
       break;
     case "TokenExpiredError":
       console.log(err)
       res.status(401).json({
-        message: "Invalid token",
+        message: "Invalid token, please login again",
       });
       break;
     case "Unauthorized":
       res.status(err.statusCode).json({
-        message: "User not registered",
+        message: "User not found",
       });
       break;
     case "WRONG_EMAIL_PASSWORD":
@@ -48,7 +46,7 @@ module.exports = (err, req, res, next) => {
       break;
     case "YOUR_APPLICATION_NOT_FOUND":
       res.status(err.statusCode).json({
-        message: "Product not found",
+        message: "Your application not found",
       });
       break;
     case "EMAIL_USER_REQUIRED":
@@ -61,9 +59,14 @@ module.exports = (err, req, res, next) => {
         message: "Password is required",
       });
       break;
-    case "DUPLICATE_PRODUCT":
+    case "DUPLICATE_APPLICATION":
       res.status(err.statusCode).json({
-        message: "Product already added on wishlist"
+        message: "Application already added on MyApplications"
+      });
+      break;
+    case "MAX_TOTAL_APPLICATION":
+      res.status(err.statusCode).json({
+        message: "You already applied 3 applications, please finish them before applied another application"
       });
       break;
     default:

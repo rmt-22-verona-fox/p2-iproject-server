@@ -3,9 +3,9 @@ const router = express.Router();
 
 const routerRegister = require("./register");
 const routerLogin = require("./login");
-const { authenticationUser } = require("../middlewares/authentication")
 const routerJobs = require('./jobs')
 const routerMyApplications = require('./myApplications')
+const { authenticationUser } = require("../middlewares/authentication")
 
 router.use("/register", routerRegister);
 router.use("/login", routerLogin);

@@ -10,7 +10,7 @@ class ControllerJobs {
             Authorization: `Token ${process.env.API_KEY_FINDWORK}`,
           } 
       })
-      let data = response.data.results
+      let data = response.data.results.slice(0, 9)
       
       let jobs = [] 
 
@@ -26,6 +26,7 @@ class ControllerJobs {
       
       res.status(200).json(jobs)
     } catch (err) {
+      console.log(err)
       if(err.response) {
         err = { name: "JOB_NOT_FOUND", statusCode: 404 }
         next(err)

@@ -1,7 +1,7 @@
 const { MyApplication } = require('../models')
 
 class ControllerMyApplications {
-  static async addMyApplications(req, res, next) {
+  static async addMyApplication(req, res, next) {
     try {
       const { jobId, title, remote, companyName, description, source , createdDate } = req.body
       const newMyApplication = await MyApplication.create({
@@ -43,7 +43,7 @@ class ControllerMyApplications {
     }
   }
 
-  static async deleteMyApplications(req, res, next) {
+  static async deleteMyApplication(req, res, next) {
     try {
       const { id } = req.params
       const myApplication = await MyApplication.findByPk(id)
@@ -62,7 +62,7 @@ class ControllerMyApplications {
     }
   }
 
-  static async updateStatusMyApplications(req, res, next) {
+  static async updateStatusMyApplication(req, res, next) {
     try {
       const { id } = req.params
       const { status } = req.body
