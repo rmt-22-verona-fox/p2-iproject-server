@@ -82,7 +82,7 @@ class userController {
         from: "fitrahdummy123@gmail.com",
         to: email,
         subject: "Reset your password!",
-        html: `<p>Click <a href="http://localhost:8080/reset/${Users.id}">here</a> to reset your password</p>`,
+        html: `<p>Click <a href="https://daiting-kacau.web.app/reset/${Users.id}">here</a> to reset your password</p>`,
       };
       transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
@@ -338,7 +338,7 @@ class userController {
       next(error);
     }
   }
-  
+
 }
 
 module.exports = userController;
