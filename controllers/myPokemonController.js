@@ -39,4 +39,41 @@ module.exports = class Controller {
       next(err);
     }
   }
+
+  static async trade(req, res, next) {
+    try {
+      const { firstUserId, firstPokemonId, secondUserId, secondPokemonId } =
+        req.body;
+      await MyPokemon.destroy({
+        where: {
+          UserId: firstUserId,
+          PokemonId: firstPokemonId,
+        },
+      });
+      const newFirstUserPokemon = await MyPokemon.create({
+        UserId: firstUserId,
+        PokemonId: secondPokemonId,
+      });
+
+      await MyPokemon.destroy({
+        where: {
+          UserId: secondUserId,
+          PokemonId: secondPokemonId,
+        },
+      });
+      const newSecondUserPokemon = await MyPokemon.create({
+        UserId: secondUserId,
+        PokemonId: firstPokemonId,
+      });
+
+      res
+        .status(200)
+        .json({
+          message: "Trade done successfully",
+          data: [newFirstUserPokemon, newSecondUserPokemon],
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
 };

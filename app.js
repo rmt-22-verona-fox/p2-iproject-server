@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const routes = require("./routes/index");
 const { errorHandler } = require("./middlewares/errorHandler");
+const axios = require("axios");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -38,16 +39,48 @@ io.on("connection", (socket) => {
   socket.emit("customEventFromServer", "response from server");
 
   socket.on("setUsername", (payload) => {
-    console.log(payload);
     users.push({ username: payload, status: "online" });
-    console.log(users);
   });
 
   socket.on("sendMessageToServer", (payload) => {
-    chats.push(payload);
+    if (payload && payload.message) {
+      chats.push(payload);
+    }
     console.log(chats);
 
     io.emit("receivedMessageFromServer", chats);
+  });
+
+  socket.on("sendPokemonToTrade", async (payload) => {
+    const { data } = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${payload.PokemonId}`
+    );
+    payload.imageUrl = data.sprites.other["official-artwork"].front_default;
+    payload.pokemonName = data.name;
+
+    chats.push(payload);
+    console.log(chats);
+
+    // for (let i = chats.length - 1; i >= 0; i--) {
+    //   const lastUser = chats[chats.length - 1].user;
+    //   if (chats[i].user !== lastUser && chats[i].PokemonId) {
+    //     chats.push({
+    //       firstUser: { } })
+    //     break;
+    //   }
+    // }
+
+    io.emit("receivedMessageFromServer", chats);
+  });
+
+  socket.on("incrementConfirmCount", () => {
+    io.emit("incrementConfirmCountServer");
+  });
+
+  socket.on("completeTrade", () => {
+    chats = [];
+    io.emit("receivedMessageFromServer", chats);
+    io.emit("completeTradeServer");
   });
 });
 

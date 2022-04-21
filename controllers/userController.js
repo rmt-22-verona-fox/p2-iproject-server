@@ -34,6 +34,7 @@ module.exports = class Controller {
       const token = generateToken({ id: user.id, email: user.email });
       res.status(200).json({
         access_token: token,
+        id: user.id,
         username: user.email,
       });
     } catch (err) {
