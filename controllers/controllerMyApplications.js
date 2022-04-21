@@ -97,7 +97,11 @@ class ControllerMyApplications {
         text: `Here you can find link to apply your application: ${updatedMyApplication[1][0].jobUrl}`
       }
 
-      await mailTransporter.sendMail(details)
+      await mailTransporter.sendMail(details, (err, info) => {
+        if(err) {
+          console.log(err)
+        }
+      })
 
       res.status(200).json(
         updatedMyApplication[1][0]

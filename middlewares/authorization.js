@@ -20,9 +20,10 @@ const authorization = async (req, res, next) => {
 const duplicateApplication = async (req, res, next) => {
   try {
     const { jobId } = req.body
+    const UserId = req.user.id
 
     const myApplication = await MyApplication.findOne({
-      where: {jobId}
+      where: {jobId, UserId}
     })
 
     if(myApplication) {

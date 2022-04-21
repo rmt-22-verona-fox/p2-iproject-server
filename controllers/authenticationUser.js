@@ -16,6 +16,7 @@ class AuthenticationUser {
         fullName: `${newUser.firstName} ${newUser.lastName}`
       });
     } catch (err) {
+      console.log(err)
       next(err);
     }
   }
