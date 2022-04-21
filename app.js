@@ -13,7 +13,7 @@ const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: "https://pokenomo-iproject.web.app",
     methods: ["GET", "POST", "OPTIONS"],
     credentials: true,
   },
