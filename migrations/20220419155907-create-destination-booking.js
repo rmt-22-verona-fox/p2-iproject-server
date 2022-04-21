@@ -26,12 +26,6 @@ module.exports = {
           id: "id",
         },
       },
-      child: {
-        type: Sequelize.INTEGER,
-      },
-      adult: {
-        type: Sequelize.INTEGER,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
