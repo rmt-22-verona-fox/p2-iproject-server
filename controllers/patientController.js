@@ -29,7 +29,7 @@ class patientController {
     
       static async login(req, res, next) {
         console.log("Patient login controller");
-        console.log(req.body.username, "<<<<<<<<<");
+        console.log(req.body.email, "<<<<<<<<<");
     
         try {
           const response = await Patient.findOne({
@@ -49,13 +49,13 @@ class patientController {
             const payload = {
               id: response.id,
             };
-    
             const token = generateToken(payload);
+            
             res.status(200).json({
               statusCode: 200,
               access_token: token,
               customer_id: response.id,
-              customer_username: response.username,
+              customer_email: response.email,
             });
           }
         } catch (err) {
@@ -132,7 +132,15 @@ class patientController {
     console.log("request controller");
     console.log(req.body, "<<<<< req.body request");
     try {
-      const response = await Doctor.findByPk(req.body.doctorId);
+      const response = await Doctor.findByPk(req.body.DoctorId);
+      const response2 = await Patient.findByPk(req.body.PatientId);
+      await DoctorPatient.create({
+          DoctorId: req.body.DoctorId,
+          PatientId: req.body.PatientId,
+          "status":"pending"
+      })
+      console.log(response.dataValues.email)
+      console.log(response2.dataValues.email)
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -143,9 +151,9 @@ class patientController {
 
       let mailOptions = {
         from: "hcms.edgar.test@gmail.com",
-        to: "edgar.dimas.ir@gmail.com",
-        subject: "Testing",
-        text: "email send from customer request",
+        to: response.dataValues.email,
+        subject: "Patient request",
+        text: `customer with email ${response2.dataValues.email} has requested an appointment with you`,
       };
 
       transporter.sendMail(mailOptions, (err, success) => {

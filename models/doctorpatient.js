@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   DoctorPatient.init({
     DoctorId: DataTypes.INTEGER,
     PatientId: DataTypes.INTEGER,
-    Status: {
+    status: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "Pending",
