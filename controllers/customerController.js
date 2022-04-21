@@ -113,6 +113,11 @@ class customerController {
       const { CustomerId, orderedHands } = req.body;
 
       const customerFound = await Customer.findByPk(CustomerId);
+
+      if (!customerFound) {
+        throw { statusCode: 404 };
+      }
+
       const increaseHands = await customerFound.increment("hands", {
         by: orderedHands,
       });
@@ -126,7 +131,6 @@ class customerController {
         message: "Transaction success",
       });
     } catch (error) {
-      c;
       next(error);
     }
   }
