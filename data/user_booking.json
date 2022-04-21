@@ -1,0 +1,62 @@
+[
+  {
+    "userId": 6,
+    "bookingId": 3,
+    "createdAt": "2022-01-26 03:17:37",
+    "updatedAt": "2021-05-31 11:48:09"
+  },
+  {
+    "userId": 8,
+    "bookingId": 5,
+    "createdAt": "2022-03-11 17:05:12",
+    "updatedAt": "2021-06-22 10:39:58"
+  },
+  {
+    "userId": 6,
+    "bookingId": 9,
+    "createdAt": "2021-06-14 18:28:25",
+    "updatedAt": "2022-01-15 04:35:00"
+  },
+  {
+    "userId": 7,
+    "bookingId": 5,
+    "createdAt": "2021-05-23 10:35:22",
+    "updatedAt": "2022-01-31 13:30:22"
+  },
+  {
+    "userId": 7,
+    "bookingId": 8,
+    "createdAt": "2022-02-24 18:06:20",
+    "updatedAt": "2021-09-03 13:33:19"
+  },
+  {
+    "userId": 10,
+    "bookingId": 7,
+    "createdAt": "2021-09-30 13:55:15",
+    "updatedAt": "2022-04-02 03:35:00"
+  },
+  {
+    "userId": 6,
+    "bookingId": 4,
+    "createdAt": "2021-09-03 18:55:05",
+    "updatedAt": "2021-12-28 09:34:09"
+  },
+  {
+    "userId": 4,
+    "bookingId": 5,
+    "createdAt": "2021-12-02 06:21:16",
+    "updatedAt": "2021-06-17 11:42:20"
+  },
+  {
+    "userId": 5,
+    "bookingId": 10,
+    "createdAt": "2022-03-22 03:55:34",
+    "updatedAt": "2021-05-28 06:23:38"
+  },
+  {
+    "userId": 8,
+    "bookingId": 8,
+    "createdAt": "2021-11-25 05:16:39",
+    "updatedAt": "2021-04-26 19:37:13"
+  }
+]
