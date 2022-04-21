@@ -1,10 +1,62 @@
-[{"destinationId":3,"userId":2,"createdAt":"2021-12-18 05:04:07","updatedAt":"2021-11-03 09:11:31"},
-{"destinationId":9,"userId":10,"createdAt":"2022-04-07 06:03:43","updatedAt":"2021-11-28 21:17:56"},
-{"destinationId":4,"userId":6,"createdAt":"2021-11-25 19:56:52","updatedAt":"2021-06-21 19:06:47"},
-{"destinationId":10,"userId":7,"createdAt":"2021-06-03 00:08:00","updatedAt":"2021-11-24 21:19:51"},
-{"destinationId":8,"userId":4,"createdAt":"2021-11-29 08:48:22","updatedAt":"2021-10-27 09:50:52"},
-{"destinationId":3,"userId":2,"createdAt":"2021-07-22 20:20:02","updatedAt":"2021-05-16 21:15:48"},
-{"destinationId":4,"userId":4,"createdAt":"2022-02-19 22:43:43","updatedAt":"2021-12-22 22:07:15"},
-{"destinationId":2,"userId":1,"createdAt":"2022-04-06 06:12:21","updatedAt":"2022-01-02 06:06:57"},
-{"destinationId":4,"userId":8,"createdAt":"2021-06-28 00:24:18","updatedAt":"2021-05-01 09:25:39"},
-{"destinationId":5,"userId":2,"createdAt":"2022-04-15 11:25:55","updatedAt":"2021-08-11 00:52:03"}]
+[
+  {
+    "destinationId": 3,
+    "userId": 2,
+    "createdAt": "2021-12-18 05:04:07",
+    "updatedAt": "2021-11-03 09:11:31"
+  },
+  {
+    "destinationId": 9,
+    "userId": 10,
+    "createdAt": "2022-04-07 06:03:43",
+    "updatedAt": "2021-11-28 21:17:56"
+  },
+  {
+    "destinationId": 4,
+    "userId": 6,
+    "createdAt": "2021-11-25 19:56:52",
+    "updatedAt": "2021-06-21 19:06:47"
+  },
+  {
+    "destinationId": 10,
+    "userId": 7,
+    "createdAt": "2021-06-03 00:08:00",
+    "updatedAt": "2021-11-24 21:19:51"
+  },
+  {
+    "destinationId": 8,
+    "userId": 4,
+    "createdAt": "2021-11-29 08:48:22",
+    "updatedAt": "2021-10-27 09:50:52"
+  },
+  {
+    "destinationId": 3,
+    "userId": 2,
+    "createdAt": "2021-07-22 20:20:02",
+    "updatedAt": "2021-05-16 21:15:48"
+  },
+  {
+    "destinationId": 4,
+    "userId": 4,
+    "createdAt": "2022-02-19 22:43:43",
+    "updatedAt": "2021-12-22 22:07:15"
+  },
+  {
+    "destinationId": 2,
+    "userId": 1,
+    "createdAt": "2022-04-06 06:12:21",
+    "updatedAt": "2022-01-02 06:06:57"
+  },
+  {
+    "destinationId": 4,
+    "userId": 8,
+    "createdAt": "2021-06-28 00:24:18",
+    "updatedAt": "2021-05-01 09:25:39"
+  },
+  {
+    "destinationId": 5,
+    "userId": 2,
+    "createdAt": "2022-04-15 11:25:55",
+    "updatedAt": "2021-08-11 00:52:03"
+  }
+]
