@@ -20,7 +20,7 @@ const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:8080",
+    origin: "*",
   },
 });
 
@@ -75,9 +75,9 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(3001, () => {
-  console.log("listening on *:3001");
-});
+  httpServer.listen(3001, () => {
+    console.log("listening on *:3001");
+  });
 
 app.use(errorHandler);
 
