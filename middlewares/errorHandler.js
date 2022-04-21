@@ -13,13 +13,13 @@ module.exports = (err, req, res, next) => {
       });
       break;
     case "JsonWebTokenError":
-      console.log(err)
+      console.log(err);
       res.status(401).json({
         message: "Invalid token, please login again",
       });
       break;
     case "TokenExpiredError":
-      console.log(err)
+      console.log(err);
       res.status(401).json({
         message: "Invalid token, please login again",
       });
@@ -61,12 +61,13 @@ module.exports = (err, req, res, next) => {
       break;
     case "DUPLICATE_APPLICATION":
       res.status(err.statusCode).json({
-        message: "Application already added on MyApplications"
+        message: "Application already added on MyApplications",
       });
       break;
     case "MAX_TOTAL_APPLICATION":
       res.status(err.statusCode).json({
-        message: "You already applied 3 applications, please finish them before applied another application"
+        message:
+          "You already applied 3 applications, please finish them before applied another application",
       });
       break;
     default:

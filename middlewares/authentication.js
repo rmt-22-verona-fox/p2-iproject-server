@@ -1,5 +1,5 @@
-const { User } = require('../models')
-const { generatePayload } = require('../helpers/helperJwt')
+const { User } = require("../models");
+const { generatePayload } = require("../helpers/helperJwt");
 
 const authenticationUser = async (req, res, next) => {
   try {
@@ -23,5 +23,5 @@ const authenticationUser = async (req, res, next) => {
 };
 
 module.exports = {
-  authenticationUser
-}
+  authenticationUser,
+};

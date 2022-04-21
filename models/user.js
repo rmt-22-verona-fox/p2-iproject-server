@@ -1,9 +1,7 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 
-const { hashPassword } = require('../helpers/helperBcrypt');
+const { hashPassword } = require("../helpers/helperBcrypt");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -14,87 +12,90 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.MyApplication)
+      User.hasMany(models.MyApplication);
     }
   }
-  User.init({
-    email: {
-      type: DataTypes.STRING,
-      unique: { msg: 'Email must be unique' },
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Email is required'
+  User.init(
+    {
+      email: {
+        type: DataTypes.STRING,
+        unique: { msg: "Email must be unique" },
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Email is required",
+          },
+          notEmpty: {
+            msg: "Email is required",
+          },
+          isEmail: {
+            msg: "Invalid email format",
+          },
         },
-        notEmpty: {
-          msg: 'Email is required'
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Password is required",
+          },
+          notEmpty: {
+            msg: "Password is required",
+          },
+          isLengthMinimumEight(value) {
+            if (value.length < 8 && value.length > 0) {
+              throw new Error("Password length minimum are 8 characters");
+            }
+          },
         },
-        isEmail: {
-          msg: 'Invalid email format'
-        }
-      }
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "First name is required",
+          },
+          notEmpty: {
+            msg: "First name is required",
+          },
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Last name is required",
+          },
+          notEmpty: {
+            msg: "Last name is required",
+          },
+        },
+      },
+      location: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Location is required",
+          },
+          notEmpty: {
+            msg: "Location is required",
+          },
+        },
+      },
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Password is required'
+    {
+      hooks: {
+        beforeCreate(instance, options) {
+          instance.password = hashPassword(instance.password);
         },
-        notEmpty: {
-          msg: 'Password is required'
-        },
-        isLengthMinimumEight(value) {
-          if (value.length < 8 && value.length > 0) {
-            throw new Error("Password length minimum are 8 characters");
-          }
-        },
-      }
-    },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'First name is required'
-        },
-        notEmpty: {
-          msg: 'First name is required'
-        }
-      }
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Last name is required'
-        },
-        notEmpty: {
-          msg: 'Last name is required'
-        }
-      }
-    },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Location is required'
-        },
-        notEmpty: {
-          msg: 'Location is required'
-        }
-      }
-    },
-  }, {
-    hooks: {
-      beforeCreate(instance, options) {
-        instance.password = hashPassword(instance.password)
-      }
-    },
-    sequelize,
-    modelName: 'User',
-  });
+      },
+      sequelize,
+      modelName: "User",
+    }
+  );
   return User;
 };
