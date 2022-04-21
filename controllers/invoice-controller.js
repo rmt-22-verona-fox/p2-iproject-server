@@ -19,7 +19,6 @@ class Controller {
         try {
             const id = req.user.id
             const { itemName, price, size, quantity } = req.body
-            console.log(itemName, price, size, quantity, id)
             const newInvoice = await Invoice.create({
                 itemName: itemName,
                 price: price * quantity,
