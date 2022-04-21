@@ -1,9 +1,13 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const cors = require("cors");
 const searchRoute = require("./routes/search");
 const { User, Buyer } = require("./models");
 var nodemailer = require("nodemailer");
-const PORT = 8080;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(cors());
