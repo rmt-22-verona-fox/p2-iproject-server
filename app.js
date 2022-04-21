@@ -21,9 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
-
-app.use(routes);
-
 let users = [];
 let chats = [];
 
@@ -75,10 +72,12 @@ io.on("connection", (socket) => {
   });
 });
 
-  httpServer.listen(3001, () => {
-    console.log("listening on *:3001");
-  });
+app.use(routes);
 
 app.use(errorHandler);
+
+httpServer.listen(process.env.PORT, () => {
+  console.log("listening on *:3001");
+});
 
 module.exports = app;
