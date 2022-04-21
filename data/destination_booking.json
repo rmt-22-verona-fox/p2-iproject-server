@@ -1,0 +1,62 @@
+[
+  {
+    "destinationId": 6,
+    "bookingId": 4,
+    "createdAt": "2021-12-08 04:26:57",
+    "updatedAt": "2021-05-02 06:46:46"
+  },
+  {
+    "destinationId": 7,
+    "bookingId": 1,
+    "createdAt": "2022-03-10 17:00:29",
+    "updatedAt": "2021-05-05 06:47:44"
+  },
+  {
+    "destinationId": 8,
+    "bookingId": 5,
+    "createdAt": "2021-05-21 08:18:10",
+    "updatedAt": "2022-04-02 13:24:38"
+  },
+  {
+    "destinationId": 7,
+    "bookingId": 4,
+    "createdAt": "2021-07-12 08:18:11",
+    "updatedAt": "2022-03-23 04:42:12"
+  },
+  {
+    "destinationId": 2,
+    "bookingId": 5,
+    "createdAt": "2021-06-24 09:21:34",
+    "updatedAt": "2021-06-29 02:33:06"
+  },
+  {
+    "destinationId": 5,
+    "bookingId": 1,
+    "createdAt": "2022-04-10 00:30:23",
+    "updatedAt": "2021-11-24 18:05:30"
+  },
+  {
+    "destinationId": 1,
+    "bookingId": 3,
+    "createdAt": "2021-05-30 09:26:38",
+    "updatedAt": "2021-06-14 06:38:57"
+  },
+  {
+    "destinationId": 10,
+    "bookingId": 3,
+    "createdAt": "2021-09-03 09:58:47",
+    "updatedAt": "2021-11-16 02:48:04"
+  },
+  {
+    "destinationId": 1,
+    "bookingId": 2,
+    "createdAt": "2021-06-17 14:53:35",
+    "updatedAt": "2021-07-05 12:07:49"
+  },
+  {
+    "destinationId": 1,
+    "bookingId": 1,
+    "createdAt": "2021-04-21 03:47:05",
+    "updatedAt": "2021-05-17 19:03:30"
+  }
+]
