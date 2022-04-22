@@ -3,12 +3,23 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require("express");
+const app = express();
 const cors = require("cors");
 const searchRoute = require("./routes/search");
 const { User, Buyer } = require("./models");
 var nodemailer = require("nodemailer");
 const PORT = process.env.PORT || 3000;
-const app = express();
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+let arrOfUser = [];
+let arrOfChats = [];
 
 app.use(cors());
 app.use(express.json());
@@ -92,6 +103,35 @@ app.get("/booking", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+io.on("connection", (socket) => {
+  console.log("a user connected", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+  });
+
+  socket.on("customEventFromClient", (payload) => {
+    console.log("terima payload:", payload);
+
+    socket.emit("customEventFromServer", "Kembalian server");
+  });
+
+  socket.on("setUsername", (payload) => {
+    arrOfUser.push({
+      email: payload,
+      status: "online",
+    });
+
+    console.log(arrOfUser);
+  });
+
+  socket.on("sendMessageToServer", (payload) => {
+    arrOfChats.push(payload);
+
+    io.emit("receiveMessageServer", arrOfChats);
+  });
+});
+
+server.listen(PORT, () => {
   console.log(`Listen on port ${PORT}`);
 });
