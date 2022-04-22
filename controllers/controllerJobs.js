@@ -12,7 +12,7 @@ class ControllerJobs {
           },
         }
       );
-      let data = response.data.results.slice(0, 9);
+      let data = response.data.results.slice(0, 6);
 
       let jobs = [];
 
